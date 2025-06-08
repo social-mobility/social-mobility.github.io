@@ -15,8 +15,15 @@
     }
     .header-top {
       background-color: #e0f2ff;
-      padding: 1px;
+      padding: 3px 20px; /* 상하 여백 최소화, 좌우는 유지 */
+      height: 130px;      /* ✅ 배경 높이 고정 */
+      display: flex;
+      align-items: center; /* ✅ 내부 콘텐츠 수직 정렬 */
     }
+    .header-top .container {
+    height: 100%; /* 배경 높이와 일치 */
+    align-items: center;
+   }
     .site-logo {
       font-size: 1.5rem;
       font-weight: 600;
