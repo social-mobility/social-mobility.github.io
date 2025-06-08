@@ -11,16 +11,50 @@
     body {
       font-family: 'Cabin', sans-serif;
       background-color: #f8f9fa;
-      padding: 2rem;
+      margin: 0;
+    }
+    .header-top {
+      background-color: #e0f2ff;
+      padding: 3px 20px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+    }
+    .header-top .container {
+      height: 100%;
+      align-items: center;
+    }
+    .site-logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #0c4a6e;
+    }
+    .site-navbar {
+      background: #cceeff;
+      padding: 0.8rem 0;
+    }
+    .site-navbar .nav-link {
+      color: #003e5c;
+      font-weight: 600;
+      margin: 0 1rem;
+    }
+    .site-navbar .nav-link:hover,
+    .site-navbar .nav-link.active {
+      text-decoration: underline;
+      font-weight: 700;
     }
     h1 {
       font-size: 2rem;
-      margin-bottom: 1.5rem;
+      margin: 2rem auto 1.5rem;
+      text-align: center;
       color: #003e5c;
     }
     .publication-list {
       padding-left: 1.2rem;
       list-style-type: square;
+      max-width: 1000px;
+      margin: 0 auto;
     }
     .publication-list li {
       margin-bottom: 1.5rem;
@@ -37,7 +71,39 @@
   </style>
 </head>
 <body>
-  <h1>Publications</h1>
+  <div class="header-top">
+    <div class="container d-flex align-items-center">
+      <a href="index.html">
+        <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
+      </a>
+      <div class="site-logo">
+        <span style="color:#0077b6; font-weight: normal">
+          <b style="font-size: 1.6em;">So</b>cially-Informed, Data-Driven<br>
+          <b style="font-size: 1.6em;">Mo</b>bility Research Group @ <b>Kyungil</b> University
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="site-navbar navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="publications.html">Publication</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Group</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <h1><strong>Publications</strong></h1>
   <ul class="publication-list">
     <li>
       <strong>EH Lee</strong>, G Stoeltje (2025).<br>
