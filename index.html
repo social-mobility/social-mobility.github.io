@@ -35,35 +35,38 @@
     .site-navbar .nav-link:hover {
       text-decoration: underline;
     }
-            .hero-container {
-              position: relative;
-              height: 400px;
-              overflow: hidden;
-            }
-            
-            /* 흐린 배경 */
-            .hero-container .hero-bg {
-              background-image: url('view.jpg');
-              background-size: cover;
-              background-position: center;
-              filter: blur(20px);
-              transform: scale(1.1); /* 약간 확대 */
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              z-index: 1;
-            }
-            
-            /* 선명한 이미지 */
-            .hero-container img.hero {
-              position: relative;
-              height: 100%;
-              width: auto;
-              object-fit: contain;
-              z-index: 2;
-}
+
+    /* ✅ HERO IMAGE (with blurred background) */
+    .hero-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .hero-container .hero-bg {
+      background-image: url('view.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px);
+      transform: scale(1.1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    .hero-container img.hero {
+      position: relative;
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      z-index: 2;
+      display: block;
+      margin: 0 auto;
+    }
+
     main {
       max-width: 1100px;
       margin: 2rem auto;
@@ -128,7 +131,9 @@
     </div>
   </nav>
 
+  <!-- ✅ Blurred Hero Background Section -->
   <div class="hero-container">
+    <div class="hero-bg"></div>
     <img class="hero" src="view.jpg" alt="Campus Background">
   </div>
 
@@ -156,26 +161,26 @@
 
     <div class="section-title"><h2>Education</h2></div>
     <ul>
-  <li>🎓 2016.03 – 2021.02 — <strong>Ph.D.</strong> in Civil and Environmental Engineering (Transportation Engineering), <em>Seoul National University</em></li>
-</ul>
+      <li>🎓 2016.03 – 2021.02 — <strong>Ph.D.</strong> in Civil and Environmental Engineering (Transportation Engineering), <em>Seoul National University</em></li>
+    </ul>
 
     <div class="section-title"><h2>Career</h2></div>
-<ul>
-  <li>🔬 Jun 2022 – Present — <strong>Assistant Research Scientist</strong>, Planning Group, <em>Texas A&M Transportation Institute</em></li>
-  <li>🧪 Mar 2021 – May 2022 — <strong>Senior Researcher</strong>, Institute of Civil and Environmental Engineering, <em>Seoul National University</em></li>
-  <li>📘 Sep 2021 – Feb 2022 — <strong>Lecturer</strong>, Department of Civil and Environmental Engineering, <em>Seoul National University</em></li>
-</ul>
+    <ul>
+      <li>🔬 Jun 2022 – Present — <strong>Assistant Research Scientist</strong>, Planning Group, <em>Texas A&M Transportation Institute</em></li>
+      <li>🧪 Mar 2021 – May 2022 — <strong>Senior Researcher</strong>, Institute of Civil and Environmental Engineering, <em>Seoul National University</em></li>
+      <li>📘 Sep 2021 – Feb 2022 — <strong>Lecturer</strong>, Department of Civil and Environmental Engineering, <em>Seoul National University</em></li>
+    </ul>
 
     <div class="section-title"><h2>Awards & Scholarships</h2></div>
-<ul>
-  <li>💎 2018.12 — <strong>Minister's Award</strong>, MOLIT, South Korea – <em>Big data project in public transportation</em></li>
-  <li>🏅 2020.09 — <strong>Outstanding Paper Award</strong>, Korea Institute of ITS</li>
-  <li>🏅 2019.09 — <strong>Outstanding Paper Award</strong>, Korea Society of Transportation Conference</li>
-  <li>🏅 2019.04 — <strong>Outstanding Paper Award</strong>, Korea Institute of ITS</li>
-  <li>🏅 2017.09 — <strong>Outstanding Paper Award</strong>, Korea Institute of ITS</li>
-  <li>🎓 2020.03–2020.08 — <strong>BK21 Plus Scholarship</strong>, Seoul National University</li>
-  <li>🎓 2018.03–2020.02 — <strong>Lecture & Research Scholarship</strong>, Seoul National University</li>
-</ul>
+    <ul>
+      <li>💎 2018.12 — <strong>Minister's Award</strong>, MOLIT, South Korea – <em>Big data project in public transportation</em></li>
+      <li>🏅 2020.09 — <strong>Outstanding Paper Award</strong>, Korea Institute of ITS</li>
+      <li>🏅 2019.09 — <strong>Outstanding Paper Award</strong>, Korea Society of Transportation Conference</li>
+      <li>🏅 2019.04 — <strong>Outstanding Paper Award</strong>, Korea Institute of ITS</li>
+      <li>🏅 2017.09 — <strong>Outstanding Paper Award</strong>, Korea Institute of ITS</li>
+      <li>🎓 2020.03–2020.08 — <strong>BK21 Plus Scholarship</strong>, Seoul National University</li>
+      <li>🎓 2018.03–2020.02 — <strong>Lecture & Research Scholarship</strong>, Seoul National University</li>
+    </ul>
 
     <div class="section-title"><h2>Links</h2></div>
     <ul>
