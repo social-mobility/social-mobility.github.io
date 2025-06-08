@@ -35,9 +35,17 @@
     .site-navbar .nav-link:hover {
       text-decoration: underline;
     }
-    .hero {
+    .hero-container {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+    }
+    .hero-container img {
+      position: absolute;
+      bottom: 0;
       width: 100%;
       height: auto;
+      transform: translateY(25%);
     }
     main {
       max-width: 1100px;
@@ -60,70 +68,31 @@
       margin-right: 0.5rem;
       font-size: 1.3rem;
     }
-    .section-title {
-      margin: 2rem 0 1rem;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
     @media (max-width: 768px) {
       .header-top {
         padding: 5px 10px 0 10px;
-      }
-      .header-top img {
-        height: 80px;
-        margin-bottom: 5px;
-      }
-      .site-logo span {
-        font-size: 0.9rem;
-        line-height: 1.2;
-      }
-      .site-navbar {
-        padding: 0.4rem 0;
-        margin-top: -10px;
-      }
-      .header-top img {
-        height: 100px;
-        margin-bottom: 10px;
-      }
-      .site-logo span {
-        font-size: 0.95rem;
-        line-height: 1.2;
-        display: inline-block;
-        max-width: 100%;
-      }
-      .header-top .container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      .site-logo {
-        font-size: 1.2rem;
-        height: auto;
-        max-height: none;
       }
       .profile {
         flex-direction: column;
         align-items: center;
         text-align: center;
       }
-      .profile img {
-        max-height: 180px;
-      }
     }
   </style>
 </head>
 <body>
   <div class="header-top">
-    <div class="container d-flex align-items-center flex-nowrap">
+    <div class="container d-flex align-items-center">
       <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
-      <div class="site-logo text-left d-flex flex-column justify-content-center" style="font-size: 2.1rem; line-height: 1.1; max-height: 200px; height: 200px;">
+      <div class="site-logo">
         <span style="color:#0077b6; font-weight: normal">
-          <b style="font-size: 1.6em;">So</b>cially-Informed, Data-Driven<br><b style="font-size: 1.6em;">Mo</b>bility Research Group @ <b>Kyungil</b> University
+          <b style="font-size: 1.6em;">So</b>cially-Informed, Data-Driven<br>
+          <b style="font-size: 1.6em;">Mo</b>bility Research Group @ <b>Kyungil</b> University
         </span>
       </div>
     </div>
   </div>
+
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container justify-content-end">
       <ul class="navbar-nav ml-auto">
@@ -135,16 +104,18 @@
       </ul>
     </div>
   </nav>
-  <div style="position: relative; height: 500px; overflow: hidden;">
-    <img class="hero" src="view.jpg" alt="Campus Background" style="position: absolute; top: -220px; width: 100%; height: auto;">
+
+  <div class="hero-container">
+    <img class="hero" src="view.jpg" alt="Campus Background">
   </div>
+
   <main>
     <div class="section-title"><h2>Faculty</h2></div>
     <div class="profile">
       <img src="faculty.jpg" alt="Faculty Photo">
-      <div style="font-size: 1.1rem;">
+      <div style="font-size: 1.4rem;">
         <p><strong>Dr. Eun Hak Lee</strong> is an Assistant Professor in the Department of Railway System Engineering at Kyungil University, South Korea.</p>
-        <p>He earned his Ph.D. in Civil and Environmental Engineering from Seoul National University under the supervision of Prof. Seung-Young Ko, with Prof. Dong-Kyu Kim as co-advisor.</p>
+        <p>He earned his Ph.D. in Civil and Environmental Engineering from Seoul National University under Prof. Seung-Young Ko, with Prof. Dong-Kyu Kim as co-advisor.</p>
         <p>His research focuses on transportation planning—particularly decision-making processes, route optimization, and AI-based forecasting—to support social mobility.</p>
         <p>Contact: yourname [AT] university.edu</p>
         <div class="icons">
@@ -156,22 +127,19 @@
         </div>
       </div>
     </div>
+
     <div class="section-title"><h2>News</h2></div>
-    <ul>
-      <li><a href="#">Latest updates and announcements</a></li>
-    </ul>
+    <ul><li><a href="#">Latest updates and announcements</a></li></ul>
+
     <div class="section-title"><h2>Education</h2></div>
-    <ul>
-      <li><a href="#">Courses and learning materials</a></li>
-    </ul>
+    <ul><li><a href="#">Courses and learning materials</a></li></ul>
+
     <div class="section-title"><h2>Career</h2></div>
-    <ul>
-      <li><a href="#">Open positions and opportunities</a></li>
-    </ul>
+    <ul><li><a href="#">Open positions and opportunities</a></li></ul>
+
     <div class="section-title"><h2>Awards & Scholarship & Fellowship</h2></div>
-    <ul>
-      <li><a href="#">Recognition and support programs</a></li>
-    </ul>
+    <ul><li><a href="#">Recognition and support programs</a></li></ul>
+
     <div class="section-title"><h2>Links</h2></div>
     <ul>
       <li><a href="https://github.com/social-mobility">GitHub Organization</a></li>
@@ -179,9 +147,11 @@
       <li><a href="mailto:contact@socialmobility.org">Email Us</a></li>
     </ul>
   </main>
+
   <footer class="footer text-center p-3" style="background:#e7f5ff;">
     <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
   </footer>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
