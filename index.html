@@ -37,8 +37,8 @@
     }
     .hero-container {
       position: relative;
-      width: 100%;
-      padding: 1rem 0; /* 여백이 필요 없다면 제거 가능 */
+      height: 400px;         /* 고정 높이 */
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -46,11 +46,10 @@
     }
     
     .hero-container img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
+      height: 100%;          /* 세로 고정 */
+      width: auto;           /* 가로는 자동 비율 */
+      object-fit: contain;   /* 이미지 전체 보이게 */
       display: block;
-      max-height: 90vh; /* 최대 세로 높이 제한 (원하는 만큼 조절) */
 }
     main {
       max-width: 1100px;
