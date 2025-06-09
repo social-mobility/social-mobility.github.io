@@ -421,7 +421,13 @@ ul.publication-list em {
     
    </ul>
 </main>
-  <!-- ✅ JS 삽입 (반응형 navbar 작동용) -->
+    <footer class="footer text-center p-3" style="background:#e7f5ff;">
+    <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
