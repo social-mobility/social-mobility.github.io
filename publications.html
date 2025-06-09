@@ -52,18 +52,35 @@
       color: #003e5c;
     }
     .publication-list {
-      padding-left: 1.2rem;
-      list-style-type: square;
+      padding: 0;
+      list-style: none;
       max-width: 1000px;
       margin: 0 auto;
     }
+    
     .publication-list li {
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.7;
+      background-color: #ffffff;
+      border-radius: 6px;
+      border-left: 4px solid #0077b6;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
+    
+    .publication-list li mark {
+      background-color: #e0f4ff;
+      color: #0077b6;
+      padding: 0 3px;
+      border-radius: 2px;
+    }
+    
     .publication-list em {
       display: block;
       font-style: italic;
+      color: #555;
+      margin-top: 4px;
+      font-size: 0.95rem;
     }
     .publication-list span {
       color: #444;
