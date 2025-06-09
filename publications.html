@@ -51,41 +51,37 @@
       text-align: center;
       color: #003e5c;
     }
-    .publication-list {
-      padding: 0;
-      list-style: none;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .publication-list li {
-      padding: 1rem 1.2rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.7;
-      background-color: #ffffff;
-      border-radius: 6px;
-      border-left: 4px solid #0077b6;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
-    
-    .publication-list li mark {
-      background-color: #e0f4ff;
-      color: #0077b6;
-      padding: 0 3px;
-      border-radius: 2px;
-    }
-    
-    .publication-list em {
-      display: block;
-      font-style: italic;
-      color: #555;
-      margin-top: 4px;
-      font-size: 0.95rem;
-    }
-    .publication-list span {
-      color: #444;
-      font-size: 0.95rem;
-    }
+    ul.publication-list {
+  padding: 0;
+  list-style: none;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+ul.publication-list > li {
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  background-color: #ffffff;
+  border-radius: 6px;
+  border-left: 4px solid #0077b6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+ul.publication-list mark {
+  background-color: #e0f4ff;
+  color: #0077b6;
+  padding: 0 3px;
+  border-radius: 2px;
+}
+
+ul.publication-list em {
+  display: block;
+  font-style: italic;
+  color: #555;
+  margin-top: 4px;
+  font-size: 0.95rem;
+}
 
     /* ✅ Mobile style 추가 */
     @media (max-width: 768px) {
@@ -114,8 +110,8 @@
             <div class="site-logo">
               <!-- PC용 긴 문장 -->
               <span class="d-none d-md-inline" style="color:#0077b6; font-weight: normal">
-                <b style="font-size: 1.6em;">So</b>cially-Informed<br> Mo</b>bility Research Group
-                <b style="font-size: 1.6em;">@ <b>Kyungil</b> University
+                <b style="font-size: 1.6em;">So</b>cially-Informed<br> 
+                <b style="font-size: 1.6em;">Mo</b>bility Research Group @ <b>Kyungil</b> University
               </span>
             
               <!-- 모바일용 짧은 문장 -->
