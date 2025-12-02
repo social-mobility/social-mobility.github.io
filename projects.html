@@ -9,28 +9,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
-  <!-- viridis colormap -->
-  <script src="https://cdn.jsdelivr.net/npm/colormap@2.3.2/colormap.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <style>
-    body { background:#f8f9fa; font-family:'Cabin',sans-serif; }
-
-    #map {
-      height: 650px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      margin: 20px auto;
-      filter: blur(0.0px); /* 흐림 */
+    body {
+      font-family: 'Cabin', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+    }
+    .header-top {
+      background-color: #e0f2ff;
+      padding: 3px 20px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+    }
+    .site-navbar {
+      background: #cceeff;
+      padding: 0.8rem 0;
+    }
+    .site-navbar .nav-link {
+      color: #003e5c;
+      font-weight: 600;
+      margin: 0 1rem;
+    }
+    .site-navbar .nav-link.active {
+      text-decoration: underline;
+      font-weight: 700;
     }
 
-    .attr-box {
-      max-width: 1100px;
-      margin: 1.5rem auto 0;
-      padding: 0 1rem;
-      text-align: right;
+    /* map area */
+    #map {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    #legend {
+      background:white;
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
     }
   </style>
 </head>
@@ -41,22 +61,26 @@
   <div class="header-top">
     <div class="container d-flex align-items-center">
       <a href="index.html">
-        <img src="logo.png" style="height:200px; margin-right:20px;">
+        <img src="logo.png" alt="Logo" style="height:200px; margin-right:20px;">
       </a>
       <div class="site-logo">
-        <b style="font-size:1.4em;">So</b>cial <b style="font-size:1.4em;">Mo</b>bility<br>
-        Research Group @ <b style="font-size:1.4em;">Kyungil</b> University
+        <span class="d-none d-md-inline" style="color:#0077b6; font-weight:normal;">
+          <b style="font-size:1.4em;">So</b>cial <b style="font-size:1.4em;">Mo</b>bility<br>
+          Research Group @ <b style="font-size:1.4em;">Kyungil</b> University
+        </span>
+        <span class="d-inline d-md-none" style="color:#0077b6; font-weight:bold;">
+          @ <b style="font-size:1.4em;">Kyungil University</b>
+        </span>
       </div>
     </div>
   </div>
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
@@ -69,96 +93,95 @@
     </div>
   </nav>
 
-  <!-- Attribute 선택 -->
-  <div class="attr-box">
-    <label><strong>Attribute:</strong></label>
-    <select id="attrSel" class="form-control" style="width:200px; display:inline-block;">
+  <!-- MAIN CONTENT -->
+  <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
+    <h2><strong>Rail GIS Project</strong></h2>
+    <p>Select an attribute to visualize Korean railway segments.</p>
+
+    <label><b>Color by attribute:</b></label>
+    <select id="attributeSelect">
       <option value="route_count">route_count</option>
       <option value="curvature_R">curvature_R</option>
       <option value="elev_mean">elev_mean</option>
       <option value="elev_max">elev_max</option>
       <option value="slope_pct">slope_pct</option>
     </select>
-  </div>
 
-  <!-- MAP -->
-  <div id="map"></div>
+    <div id="map"></div>
+  </main>
 
+  <!-- FOOTER -->
   <footer class="footer text-center p-3" style="background:#e7f5ff;">
-    <p>&copy; <span id="year"></span> Social Mobility Group.</p>
+    <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
   </footer>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 
-  <!-- Leaflet -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    var map = L.map('map').setView([36.5, 128], 8);
 
-  <script>
-    //----------------------------------------------------------------------
-    // 지도 초기화 (대한민국 중심)
-    //----------------------------------------------------------------------
-    var map = L.map('map').setView([36.3, 128], 8);
-    map.setMaxBounds([[33,124],[39.5,132]]);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18
-    }).addTo(map);
+    let geoData, geoLayer;
 
-    //----------------------------------------------------------------------
-    // viridis 색상 매핑 (정규화 없이 값 자체 기반)
-    //----------------------------------------------------------------------
-    function viridisByValue(v) {
-      const cmap = colormap({ colormap:"viridis", nshades:256, format:"hex" });
-      let idx = Math.floor((v * 37) % 256);
-      if (idx < 0) idx = -idx;
-      return cmap[idx];
+    // viridis palette
+    function viridis(t) {
+      const p = [
+        [253,231,37], [94,201,98], [33,145,140], [59,82,139], [68,1,84]
+      ];
+      let idx = Math.min(4, Math.floor(t*5));
+      let c = p[idx];
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
 
-    var geojsonLayer;
-    var geojsonData;
-
-    //----------------------------------------------------------------------
-    // GeoJSON 불러오기55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-    //----------------------------------------------------------------------
     fetch("projects/rail_dem_small2.geojson")
-      .then(r => r.json())
-      .then(data => {
-        geojsonData = data;
+      .then(res=>res.json())
+      .then(data=>{
+        geoData = data;
         updateMap("route_count");
       });
 
-    //----------------------------------------------------------------------
-    // 지도 업데이트
-    //----------------------------------------------------------------------
     function updateMap(attr) {
+      if (geoLayer) geoLayer.remove();
 
-      if (geojsonLayer) geojsonLayer.remove();
+      const vals = geoData.features.map(f=>f.properties[attr]).filter(v=>v!=null);
+      const min = Math.min(...vals);
+      const max = Math.max(...vals);
 
-      geojsonLayer = L.geoJSON(geojsonData, {
-        style: f => ({
-          color: viridisByValue(f.properties[attr]),
-          weight: 4,
-          opacity: 1.0
-        }),
-
-        onEachFeature: (feature, layer) => {
-          layer.bindTooltip(
-            `<b>${attr}</b>: ${feature.properties[attr]}`,
-            { sticky: true }
-          );
+      geoLayer = L.geoJSON(geoData, {
+        style: f=>{
+          const v = f.properties[attr];
+          const t = (v - min)/(max - min);
+          return { color: viridis(t), weight:2 };
+        },
+        onEachFeature:(f,l)=>{
+          l.bindTooltip(`${attr}: ${f.properties[attr]}`,{sticky:true});
         }
       }).addTo(map);
+
+      updateLegend(attr,min,max);
     }
 
-    //----------------------------------------------------------------------
-    // dropdown 이벤트
-    //----------------------------------------------------------------------
-    document.getElementById("attrSel").addEventListener("change", function(){
-      updateMap(this.value);
-    });
+    function updateLegend(attr,min,max){
+      if (document.getElementById("legend")) document.getElementById("legend").remove();
 
+      const legend = L.control({position:"bottomright"});
+      legend.onAdd = function(){
+        const div = L.DomUtil.create("div");
+        div.id = "legend";
+        div.innerHTML = `
+          <b>${attr}</b><br>
+          <i style="background:${viridis(0)};width:20px;height:10px;display:inline-block"></i> ${min}<br>
+          <i style="background:${viridis(1)};width:20px;height:10px;display:inline-block"></i> ${max}<br>
+        `;
+        return div;
+      };
+      legend.addTo(map);
+    }
+
+    document.getElementById("attributeSelect")
+      .addEventListener("change", e => updateMap(e.target.value));
   </script>
 
 </body>
