@@ -117,72 +117,99 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  let map = L.map('map', {
+    zoomControl: true,
+    minZoom: 7,
+    maxZoom: 12,
+  }).setView([36.5, 128], 8);
 
-    var map = L.map('map').setView([36.5, 128], 8);
+  /* 🔥 한국 영역으로 고정 (maxBounds) */
+  var koreaBounds = [
+    [33.0, 124.0],  // SW corner
+    [39.5, 132.0]   // NE corner
+  ];
+  map.setMaxBounds(koreaBounds);
+  map.on('drag', function () {
+    map.panInsideBounds(koreaBounds, { animate: false });
+  });
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    let geoData, geoLayer;
-
-    // viridis palette
-    function viridis(t) {
-      const p = [
-        [253,231,37], [94,201,98], [33,145,140], [59,82,139], [68,1,84]
-      ];
-      let idx = Math.min(4, Math.floor(t*5));
-      let c = p[idx];
-      return `rgb(${c[0]},${c[1]},${c[2]})`;
+  /* 🔥 배경 지도 흐림 처리 */
+  let blurredTile = L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom: 18,
+      opacity: 1
     }
+  );
 
-    fetch("projects/rail_links_merged_max.geojson")
-      .then(res=>res.json())
-      .then(data=>{
-        geoData = data;
-        updateMap("route_count");
-      });
+  blurredTile.addTo(map);
 
-    function updateMap(attr) {
-      if (geoLayer) geoLayer.remove();
+  // CSS blur 효과 적용
+  const tileObserver = new MutationObserver(() => {
+    document.querySelectorAll(".leaflet-tile").forEach(tile => {
+      tile.style.filter = "blur(1.8px) brightness(0.92)";
+    });
+  });
+  tileObserver.observe(document.getElementById("map"), { childList: true, subtree: true });
 
-      const vals = geoData.features.map(f=>f.properties[attr]).filter(v=>v!=null);
-      const min = Math.min(...vals);
-      const max = Math.max(...vals);
 
-      geoLayer = L.geoJSON(geoData, {
-        style: f=>{
-          const v = f.properties[attr];
-          const t = (v - min)/(max - min);
-          return { color: viridis(t), weight:2 };
-        },
-        onEachFeature:(f,l)=>{
-          l.bindTooltip(`${attr}: ${f.properties[attr]}`,{sticky:true});
-        }
-      }).addTo(map);
+  // GeoJSON 파일 (GitHub Pages)
+  const geojsonURL = "data/rail_links_merged_small.geojson";
 
-      updateLegend(attr,min,max);
-    }
+  let layer;
+  let geojsonData;
 
-    function updateLegend(attr,min,max){
-      if (document.getElementById("legend")) document.getElementById("legend").remove();
+  /* 🔥 viridis-like 색상 */
+  function viridisColor(value, min, max) {
+    let t = (value - min) / (max - min + 1e-9);
+    let r = Math.floor(68 + (253 - 68) * t);
+    let g = Math.floor(1 + (231 - 1) * t);
+    let b = Math.floor(84 + (37 - 84) * t);
+    return `rgb(${r},${g},${b})`;
+  }
 
-      const legend = L.control({position:"bottomright"});
-      legend.onAdd = function(){
-        const div = L.DomUtil.create("div");
-        div.id = "legend";
-        div.innerHTML = `
-          <b>${attr}</b><br>
-          <i style="background:${viridis(0)};width:20px;height:10px;display:inline-block"></i> ${min}<br>
-          <i style="background:${viridis(1)};width:20px;height:10px;display:inline-block"></i> ${max}<br>
-        `;
-        return div;
+  /* 🔥 스타일 생성 (굵기 증가 weight=5) */
+  function styleByAttribute(attr) {
+    let values = geojsonData.features
+      .map(f => f.properties[attr])
+      .filter(v => v !== null);
+
+    let min = Math.min(...values);
+    let max = Math.max(...values);
+
+    return function (feature) {
+      return {
+        color: viridisColor(feature.properties[attr], min, max),
+        weight: 5,
+        opacity: 0.9
       };
-      legend.addTo(map);
-    }
+    };
+  }
 
-    document.getElementById("attributeSelect")
-      .addEventListener("change", e => updateMap(e.target.value));
-  </script>
+  /* 🔥 지도 업데이트 함수 */
+  function updateLayer(attr) {
+    if (layer) map.removeLayer(layer);
 
-</body>
-</html>
+    layer = L.geoJSON(geojsonData, {
+      style: styleByAttribute(attr),
+      onEachFeature: function (feature, layer) {
+        layer.bindTooltip(`${attr}: ${feature.properties[attr]}`, {
+          sticky: true
+        });
+      }
+    }).addTo(map);
+  }
+
+  /* 🔥 GeoJSON 로드 */
+  fetch(geojsonURL)
+    .then(res => res.json())
+    .then(json => {
+      geojsonData = json;
+      updateLayer("curvature_R");
+    });
+
+  /* 🔥 attribute 선택 이벤트 */
+  document.getElementById("attrSelect").addEventListener("change", e => {
+    updateLayer(e.target.value);
+  });
+</script>
