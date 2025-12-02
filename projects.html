@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rail GIS Project</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Social Mobility Group</title>
 
-  <!-- Leaflet CSS -->
+  <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
+    body {
+      font-family: 'Cabin', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+    }
+    .header-top {
+      background-color: #e0f2ff;
+      padding: 3px 20px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+    }
+    .site-navbar { background: #cceeff; padding: 0.8rem 0; }
+    .site-navbar .nav-link { color: #003e5c; font-weight: 600; margin: 0 1rem; }
+    .site-navbar .nav-link.active { text-decoration: underline; font-weight: 700; }
+
+    /* Map */
     #map {
       width: 100%;
       height: 600px;
-      margin-top: 20px;
       border: 1px solid #ccc;
       border-radius: 8px;
-    }
-
-    #controller {
-      margin: 20px 0;
+      margin-top: 20px;
     }
 
     #legend {
@@ -32,87 +51,130 @@
 </head>
 
 <body>
-  <div class="container" style="padding:20px;">
-    <h2>Rail Segment Visualization (with Attribute Coloring)</h2>
-    <p>Select an attribute to visualize the Korean railway segments.</p>
 
-    <!-- 🔽 속성 선택 드롭다운 -->
-    <div id="controller">
-      <label><b>Color by attribute:</b></label>
-      <select id="attributeSelect">
-        <option value="route_count">route_count</option>
-        <option value="curvature_R">curvature_R</option>
-        <option value="elev_mean">elev_mean</option>
-        <option value="elev_max">elev_max</option>
-        <option value="slope_pct">slope_pct</option>
-      </select>
+  <!-- HEADER -->
+  <div class="header-top">
+    <div class="container d-flex align-items-center">
+      <a href="index.html">
+        <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
+      </a>
+
+      <div class="site-logo">
+        <span class="d-none d-md-inline" style="color:#0077b6; font-weight: normal">
+          <b style="font-size: 1.4em;">So</b>cial <b style="font-size: 1.4em;">Mo</b>bility<br>
+          Research Group @ <b style="font-size: 1.4em;">Kyungil</b> University
+        </span>
+
+        <span class="d-inline d-md-none" style="color:#0077b6; font-weight: bold">
+          @ <b style="font-size: 1.4em;">Kyungil University</b>
+        </span>
+      </div>
     </div>
   </div>
 
-  <div id="map"></div>
+  <!-- NAVBAR -->
+  <nav class="site-navbar navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="publications.html">Publication</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Group</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <!-- Leaflet JS -->
+  <!-- MAIN -->
+  <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
+    <h2>Rail GIS Visualization</h2>
+    <p>Select an attribute to visualize the simplified 250m rail segments.</p>
+
+    <label><b>Color by attribute:</b></label>
+    <select id="attributeSelect">
+      <option value="route_count">route_count</option>
+      <option value="curvature_R">curvature_R</option>
+      <option value="elev_mean">elev_mean</option>
+      <option value="elev_max">elev_max</option>
+      <option value="slope_pct">slope_pct</option>
+    </select>
+
+    <div id="map"></div>
+  </main>
+
+  <footer class="footer text-center p-3" style="background:#e7f5ff;">
+    <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
     var map = L.map('map').setView([36.5, 128], 8);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors'
+      maxZoom: 18
     }).addTo(map);
 
-    var geojsonData; // 데이터 저장용
-    var geojsonLayer; // 현재 지도 레이어 저장용
+    var geojsonData, geoLayer;
 
-    // GeoJSON 로드
+    // viridis colormap function
+    function viridis(t) {
+      // t: 0~1
+      const colors = [
+        [253, 231, 37],
+        [94, 201, 98],
+        [33, 145, 140],
+        [59, 82, 139],
+        [68, 1, 84]
+      ];
+      const idx = Math.min(colors.length - 1, Math.floor(t * colors.length));
+      let c = colors[idx];
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+
     fetch("projects/rail_dem_small2.geojson")
       .then(res => res.json())
       .then(data => {
         geojsonData = data;
-        updateMap("route_count");  // 기본값
+        updateMap("route_count");
       });
 
-    // 🔥 속성값 → 색상 매핑 함수
-    function getColor(value, min, max) {
-      var t = (value - min) / (max - min); // 0~1 정규화
-      t = Math.max(0, Math.min(1, t));
-      var r = Math.floor(255 * t);
-      var g = Math.floor(255 * (1 - t));
-      return "rgb(" + r + "," + g + ",0)";
-    }
-
-    // 🔥 속성별로 지도 업데이트
     function updateMap(attribute) {
-      // 기존 레이어 제거
-      if (geojsonLayer) {
-        geojsonLayer.remove();
-      }
+      if (geoLayer) geoLayer.remove();
 
-      // 속성 값 리스트 가져오기
-      var values = geojsonData.features
+      let values = geojsonData.features
         .map(f => f.properties[attribute])
-        .filter(v => v !== null && v !== undefined);
+        .filter(v => v != null);
 
-      var min = Math.min(...values);
-      var max = Math.max(...values);
+      let min = Math.min(...values);
+      let max = Math.max(...values);
 
-      // GeoJSON 재적용
-      geojsonLayer = L.geoJSON(geojsonData, {
-        style: function (feature) {
-          var v = feature.properties[attribute];
+      geoLayer = L.geoJSON(geojsonData, {
+        style: f => {
+          let v = f.properties[attribute];
+          let t = (v - min) / (max - min);
           return {
-            color: getColor(v, min, max),
-            weight: 2,
-            opacity: 0.9
+            color: viridis(t),
+            weight: 2
           };
+        },
+        onEachFeature: (feature, layer) => {
+          layer.bindTooltip(`${attribute}: ${feature.properties[attribute]}`, {
+            sticky: true
+          });
         }
       }).addTo(map);
 
       updateLegend(attribute, min, max);
     }
 
-    // 🔥 범례(legend) 업데이트
     function updateLegend(attribute, min, max) {
       if (document.getElementById("legend")) {
         document.getElementById("legend").remove();
@@ -124,20 +186,17 @@
         var div = L.DomUtil.create("div", "info legend");
         div.id = "legend";
         div.innerHTML =
-          "<b>" + attribute + "</b><br>" +
-          "<i style='background:rgb(255,0,0);width:20px;height:10px;display:inline-block'></i> " + max.toFixed(2) + "<br>" +
-          "<i style='background:rgb(255,255,0);width:20px;height:10px;display:inline-block'></i> " + min.toFixed(2) + "<br>";
+          `<b>${attribute}</b><br>
+          <i style="background:${viridis(0)};width:20px;height:10px;display:inline-block"></i> ${min.toFixed(2)}<br>
+          <i style="background:${viridis(1)};width:20px;height:10px;display:inline-block"></i> ${max.toFixed(2)}<br>`;
         return div;
       };
 
       legend.addTo(map);
     }
 
-    // 🔽 드롭다운 변경 이벤트
     document.getElementById("attributeSelect")
-      .addEventListener("change", function () {
-        updateMap(this.value);
-      });
+      .addEventListener("change", e => updateMap(e.target.value));
   </script>
 
 </body>
