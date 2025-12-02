@@ -38,20 +38,17 @@
       font-weight: 700;
     }
 
-    /* map area */
     #map {
       width: 100%;
       height: 600px;
       border: 1px solid #ccc;
       border-radius: 8px;
       margin-top: 20px;
+      position: relative;
+      z-index: 1;
     }
-    #legend {
-      background:white;
-      padding:8px;
-      border-radius:6px;
-      border:1px solid #ccc;
-    }
+
+    /* ⭐ 배경지도 흐리게 */
     .leaflet-tile {
       filter: blur(2px) brightness(0.9);
       -webkit-filter: blur(2px) brightness(0.9);
@@ -76,7 +73,7 @@
       </a>
       <div class="site-logo">
         <span class="d-none d-md-inline" style="color:#0077b6; font-weight:normal;">
-          <b style="font-size:1.4em;">So</b>cial <b style="font-size:1.4em;">Mo</b>bility<br>
+          <b style="font-size:1.4em;">So</b>cial <bstyle="font-size:1.4em;">Mo</b> bility<br>
           Research Group @ <b style="font-size:1.4em;">Kyungil</b> University
         </span>
         <span class="d-inline d-md-none" style="color:#0077b6; font-weight:bold;">
@@ -106,7 +103,7 @@
 
   <!-- MAIN CONTENT -->
   <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
-    <h2><strong>Rail GIS Project111</strong></h2>
+    <h2><strong>Rail GIS Project</strong></h2>
     <p>Select an attribute to visualize Korean railway segments.</p>
 
     <label><b>Color by attribute:</b></label>
@@ -127,16 +124,24 @@
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    var map = L.map('map').setView([36.5, 128], 8);
+    // ----------------------------------------
+    // ⭐ 지도 초기화 + 한국 범위 제한
+    // ----------------------------------------
+    var map = L.map('map', {
+      minZoom: 6,
+      maxZoom: 18,
+      maxBounds: [[33.0, 124.0], [39.5, 132.0]],  // 한국 영역
+      maxBoundsViscosity: 1.0                     // 강하게 고정
+    }).setView([36.5, 128], 8);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     let geoData, geoLayer;
 
-    // viridis palette
     function viridis(t) {
       const p = [
         [253,231,37], [94,201,98], [33,145,140], [59,82,139], [68,1,84]
@@ -146,7 +151,7 @@
       return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
 
-    fetch("projects/rail_all.geojson")
+    fetch("project/rail_all.geojson")
       .then(res=>res.json())
       .then(data=>{
         geoData = data;
@@ -164,7 +169,7 @@
         style: f=>{
           const v = f.properties[attr];
           const t = (v - min)/(max - min);
-          return { color: viridis(t), weight:2 };
+          return { color: viridis(t), weight:3 };
         },
         onEachFeature:(f,l)=>{
           l.bindTooltip(`${attr}: ${f.properties[attr]}`,{sticky:true});
