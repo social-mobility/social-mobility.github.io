@@ -12,14 +12,16 @@
       width: 100%;
       height: 600px;
       margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" style="padding:20px;">
     <h2>Rail Segment Visualization</h2>
-    <p>This map shows the 250m segmented railway GIS layer.</p>
+    <p>This map shows the simplified 250m segmented railway GIS layer (rail_dem_small.geojson).</p>
   </div>
 
   <div id="map"></div>
@@ -28,26 +30,31 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    // 지도 초기화
-    var map = L.map('map').setView([36.5, 128], 8); // 중앙값은 적당히 조정
+    // 1) 지도 초기 설정
+    var map = L.map('map').setView([36.5, 128], 8);
 
-    // 배경지도 무료 타일 (OSM)
+    // 2) 무료 OSM 타일
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // GitHub RAW GeoJSON URL
-    var geojson_url = "https://raw.githubusercontent.com/social-mobility/rail-gis/main/rail-segments/rail_segments_250m_dem.geojson";
+    // 3) GitHub Pages 프로젝트 폴더 내부 GeoJSON 경로
+    var geojson_url = "projects/rail_dem_small2.geojson";
 
-    // GeoJSON 불러오기
+    // 4) GeoJSON 불러오기
     fetch(geojson_url)
       .then(response => response.json())
       .then(data => {
         L.geoJSON(data, {
-          style: { color: "red", weight: 2 }
+          style: {
+            color: "#d62828",  // 철도 레드 컬러
+            weight: 2,
+            opacity: 0.9
+          }
         }).addTo(map);
-      });
+      })
+      .catch(err => console.error("GeoJSON load error:", err));
   </script>
 
 </body>
