@@ -9,9 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <style>
     body {
@@ -26,11 +24,21 @@
       display: flex;
       align-items: center;
     }
-    .site-navbar { background: #cceeff; padding: 0.8rem 0; }
-    .site-navbar .nav-link { color: #003e5c; font-weight: 600; margin: 0 1rem; }
-    .site-navbar .nav-link.active { text-decoration: underline; font-weight: 700; }
+    .site-navbar {
+      background: #cceeff;
+      padding: 0.8rem 0;
+    }
+    .site-navbar .nav-link {
+      color: #003e5c;
+      font-weight: 600;
+      margin: 0 1rem;
+    }
+    .site-navbar .nav-link.active {
+      text-decoration: underline;
+      font-weight: 700;
+    }
 
-    /* Map */
+    /* map area */
     #map {
       width: 100%;
       height: 600px;
@@ -38,14 +46,11 @@
       border-radius: 8px;
       margin-top: 20px;
     }
-
     #legend {
-      background: white;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      line-height: 1.2;
+      background:white;
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
     }
   </style>
 </head>
@@ -56,23 +61,21 @@
   <div class="header-top">
     <div class="container d-flex align-items-center">
       <a href="index.html">
-        <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
+        <img src="logo.png" alt="Logo" style="height:200px; margin-right:20px;">
       </a>
-
       <div class="site-logo">
-        <span class="d-none d-md-inline" style="color:#0077b6; font-weight: normal">
-          <b style="font-size: 1.4em;">So</b>cial <b style="font-size: 1.4em;">Mo</b>bility<br>
-          Research Group @ <b style="font-size: 1.4em;">Kyungil</b> University
+        <span class="d-none d-md-inline" style="color:#0077b6; font-weight:normal;">
+          <b style="font-size:1.4em;">So</b>cial <b style="font-size:1.4em;">Mo</b>bility<br>
+          Research Group @ <b style="font-size:1.4em;">Kyungil</b> University
         </span>
-
-        <span class="d-inline d-md-none" style="color:#0077b6; font-weight: bold">
-          @ <b style="font-size: 1.4em;">Kyungil University</b>
+        <span class="d-inline d-md-none" style="color:#0077b6; font-weight:bold;">
+          @ <b style="font-size:1.4em;">Kyungil University</b>
         </span>
       </div>
     </div>
   </div>
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -90,10 +93,10 @@
     </div>
   </nav>
 
-  <!-- MAIN -->
+  <!-- MAIN CONTENT -->
   <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
-    <h2>Rail GIS Visualization</h2>
-    <p>Select an attribute to visualize the simplified 250m rail segments.</p>
+    <h2><strong>Rail GIS Project</strong></h2>
+    <p>Select an attribute to visualize Korean railway segments.</p>
 
     <label><b>Color by attribute:</b></label>
     <select id="attributeSelect">
@@ -107,91 +110,73 @@
     <div id="map"></div>
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer text-center p-3" style="background:#e7f5ff;">
     <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
     var map = L.map('map').setView([36.5, 128], 8);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18
-    }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    var geojsonData, geoLayer;
+    let geoData, geoLayer;
 
-    // viridis colormap function
+    // viridis palette
     function viridis(t) {
-      // t: 0~1
-      const colors = [
-        [253, 231, 37],
-        [94, 201, 98],
-        [33, 145, 140],
-        [59, 82, 139],
-        [68, 1, 84]
+      const p = [
+        [253,231,37], [94,201,98], [33,145,140], [59,82,139], [68,1,84]
       ];
-      const idx = Math.min(colors.length - 1, Math.floor(t * colors.length));
-      let c = colors[idx];
+      let idx = Math.min(4, Math.floor(t*5));
+      let c = p[idx];
       return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
 
     fetch("projects/rail_dem_small2.geojson")
-      .then(res => res.json())
-      .then(data => {
-        geojsonData = data;
+      .then(res=>res.json())
+      .then(data=>{
+        geoData = data;
         updateMap("route_count");
       });
 
-    function updateMap(attribute) {
+    function updateMap(attr) {
       if (geoLayer) geoLayer.remove();
 
-      let values = geojsonData.features
-        .map(f => f.properties[attribute])
-        .filter(v => v != null);
+      const vals = geoData.features.map(f=>f.properties[attr]).filter(v=>v!=null);
+      const min = Math.min(...vals);
+      const max = Math.max(...vals);
 
-      let min = Math.min(...values);
-      let max = Math.max(...values);
-
-      geoLayer = L.geoJSON(geojsonData, {
-        style: f => {
-          let v = f.properties[attribute];
-          let t = (v - min) / (max - min);
-          return {
-            color: viridis(t),
-            weight: 2
-          };
+      geoLayer = L.geoJSON(geoData, {
+        style: f=>{
+          const v = f.properties[attr];
+          const t = (v - min)/(max - min);
+          return { color: viridis(t), weight:2 };
         },
-        onEachFeature: (feature, layer) => {
-          layer.bindTooltip(`${attribute}: ${feature.properties[attribute]}`, {
-            sticky: true
-          });
+        onEachFeature:(f,l)=>{
+          l.bindTooltip(`${attr}: ${f.properties[attr]}`,{sticky:true});
         }
       }).addTo(map);
 
-      updateLegend(attribute, min, max);
+      updateLegend(attr,min,max);
     }
 
-    function updateLegend(attribute, min, max) {
-      if (document.getElementById("legend")) {
-        document.getElementById("legend").remove();
-      }
+    function updateLegend(attr,min,max){
+      if (document.getElementById("legend")) document.getElementById("legend").remove();
 
-      var legend = L.control({ position: "bottomright" });
-
-      legend.onAdd = function () {
-        var div = L.DomUtil.create("div", "info legend");
+      const legend = L.control({position:"bottomright"});
+      legend.onAdd = function(){
+        const div = L.DomUtil.create("div");
         div.id = "legend";
-        div.innerHTML =
-          `<b>${attribute}</b><br>
-          <i style="background:${viridis(0)};width:20px;height:10px;display:inline-block"></i> ${min.toFixed(2)}<br>
-          <i style="background:${viridis(1)};width:20px;height:10px;display:inline-block"></i> ${max.toFixed(2)}<br>`;
+        div.innerHTML = `
+          <b>${attr}</b><br>
+          <i style="background:${viridis(0)};width:20px;height:10px;display:inline-block"></i> ${min}<br>
+          <i style="background:${viridis(1)};width:20px;height:10px;display:inline-block"></i> ${max}<br>
+        `;
         return div;
       };
-
       legend.addTo(map);
     }
 
