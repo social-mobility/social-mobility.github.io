@@ -101,9 +101,11 @@
     </div>
   </nav>
 
+  <!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT -->
   <!-- MAIN CONTENT -->
   <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
-    <h2><strong>Rail GIS Project_base</strong></h2>
+    <h2><strong>Rail GIS Project_base_joined</strong></h2>  
     <p>Select an attribute to visualize Korean railway segments.</p>
 
     <label><b>Color by attribute:</b></label>
@@ -152,7 +154,7 @@
       return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
 
-    fetch("projects/base.geojson") // ################################################################################################################
+    fetch("projects/base_joined.geojson") // ################################################################################################################
       .then(res=>res.json())
       .then(data=>{
         geoData = data;
