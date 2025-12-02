@@ -10,98 +10,42 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <!-- Viridis colormap -->
+  <!-- viridis colormap -->
   <script src="https://cdn.jsdelivr.net/npm/colormap@2.3.2/colormap.min.js"></script>
 
   <style>
-    body {
-      font-family: 'Cabin', sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-    }
+    body { background:#f8f9fa; font-family:'Cabin',sans-serif; }
 
-    /* Header & Navbar (기존 유지) */
-    .header-top {
-      background-color: #e0f2ff;
-      padding: 3px 20px;
-      height: 180px;
-      display: flex;
-      align-items: center;
-    }
-    .header-top .container {
-      height: 100%;
-      align-items: center;
-    }
-    .site-logo {
-      font-size: 1.5rem;
-      font-weight: 600;
-      line-height: 1.5;
-      color: #0c4a6e;
-    }
-    .site-navbar {
-      background: #cceeff;
-      padding: 0.8rem 0;
-    }
-    .site-navbar .nav-link {
-      color: #003e5c;
-      font-weight: 600;
-      margin: 0 1rem;
-    }
-    .site-navbar .nav-link:hover,
-    .site-navbar .nav-link.active {
-      text-decoration: underline;
-      font-weight: 700;
-    }
-
-    /* Map */
     #map {
-      width: 100%;
       height: 650px;
-      margin: 2rem auto;
       border: 2px solid #ccc;
       border-radius: 8px;
-      filter: blur(0.8px); /* 지도 약간 흐림 */
+      margin: 20px auto;
+      filter: blur(0.8px); /* 흐림 */
     }
 
-    /* Dropdown for attribute */
     .attr-box {
       max-width: 1100px;
       margin: 1.5rem auto 0;
       padding: 0 1rem;
       text-align: right;
     }
-
-    @media (max-width: 768px) {
-      .header-top { padding: 5px 10px; height: auto; }
-      .site-logo {
-        font-size: 1rem;
-        line-height: 1.0;
-        text-align: center;
-      }
-    }
   </style>
 </head>
 
 <body>
+
   <!-- HEADER -->
   <div class="header-top">
     <div class="container d-flex align-items-center">
       <a href="index.html">
-        <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
+        <img src="logo.png" style="height:200px; margin-right:20px;">
       </a>
-
       <div class="site-logo">
-        <span class="d-none d-md-inline" style="color:#0077b6; font-weight: normal">
-          <b style="font-size: 1.4em;">So</b>cial <b style="font-size: 1.4em;">Mo</b>bility<br>
-          Research Group @ <b style="font-size: 1.4em;">Kyungil</b> University
-        </span>
-
-        <span class="d-inline d-md-none" style="color:#0077b6; font-weight: bold">
-          @ <b style="font-size: 1.4em;">Kyungil University</b>
-        </span>
+        <b style="font-size:1.4em;">So</b>cial <b style="font-size:1.4em;">Mo</b>bility<br>
+        Research Group @ <b style="font-size:1.4em;">Kyungil</b> University
       </div>
     </div>
   </div>
@@ -109,9 +53,7 @@
   <!-- NAVBAR -->
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-              data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-              aria-label="Toggle navigation">
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -127,10 +69,10 @@
     </div>
   </nav>
 
-  <!-- Attribute Selector -->
+  <!-- Attribute 선택 -->
   <div class="attr-box">
     <label><strong>Attribute:</strong></label>
-    <select id="attrSelect" class="form-control" style="width:200px; display:inline-block;">
+    <select id="attrSel" class="form-control" style="width:200px; display:inline-block;">
       <option value="route_count">route_count</option>
       <option value="curvature_R">curvature_R</option>
       <option value="elev_mean">elev_mean</option>
@@ -143,92 +85,64 @@
   <div id="map"></div>
 
   <footer class="footer text-center p-3" style="background:#e7f5ff;">
-    <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> Social Mobility Group.</p>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    //--------------------------------------------------------------------
-    // 1) 지도 초기화 (한국 중심)
-    //--------------------------------------------------------------------
-    var map = L.map('map', {
-      zoomControl: true,
-      minZoom: 6,
-      maxZoom: 12
-    }).setView([36.3, 128], 8);
+    //----------------------------------------------------------------------
+    // 지도 초기화 (대한민국 중심)
+    //----------------------------------------------------------------------
+    var map = L.map('map').setView([36.3, 128], 8);
+    map.setMaxBounds([[33,124],[39.5,132]]);
 
-    // 대한민국 영역 제한
-    var koreaBounds = [
-      [33.0, 124.0], // SW
-      [39.5, 132.0]  // NE
-    ];
-    map.setMaxBounds(koreaBounds);
-
-    //--------------------------------------------------------------------
-    // 2) 배경 타일
-    //--------------------------------------------------------------------
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 18
     }).addTo(map);
 
-    //--------------------------------------------------------------------
-    // 3) viridis colormap 만들기
-    //--------------------------------------------------------------------
-    function getViridisColor(value, min, max) {
-      var cmap = colormap({
-        colormap: 'viridis',
-        nshades: 256,
-        format: 'hex',
-        alpha: 1
-      });
-      var t = (value - min) / (max - min);
-      t = Math.max(0, Math.min(1, t));
-      var index = Math.floor(t * 255);
-      return cmap[index];
+    //----------------------------------------------------------------------
+    // viridis 색상 매핑 (정규화 없이 값 자체 기반)
+    //----------------------------------------------------------------------
+    function viridisByValue(v) {
+      const cmap = colormap({ colormap:"viridis", nshades:256, format:"hex" });
+      let idx = Math.floor((v * 37) % 256);
+      if (idx < 0) idx = -idx;
+      return cmap[idx];
     }
 
-    //--------------------------------------------------------------------
-    // 4) GeoJSON 로드
-    //--------------------------------------------------------------------
     var geojsonLayer;
     var geojsonData;
-    var geojson_url = "projects/rail_links_entire.geojson";
 
-    fetch(geojson_url)
+    //----------------------------------------------------------------------
+    // GeoJSON 불러오기
+    //----------------------------------------------------------------------
+    fetch("projects/rail_links_entire.geojson")
       .then(r => r.json())
       .then(data => {
         geojsonData = data;
-        updateMap("route_count"); // 기본 항목
+        updateMap("route_count");
       });
 
-    //--------------------------------------------------------------------
-    // 5) 지도 업데이트 함수
-    //--------------------------------------------------------------------
+    //----------------------------------------------------------------------
+    // 지도 업데이트
+    //----------------------------------------------------------------------
     function updateMap(attr) {
 
       if (geojsonLayer) geojsonLayer.remove();
 
-      // min-max 구하기
-      var values = geojsonData.features.map(f => f.properties[attr]);
-      var minVal = Math.min(...values);
-      var maxVal = Math.max(...values);
-
       geojsonLayer = L.geoJSON(geojsonData, {
-        style: feature => {
-          var v = feature.properties[attr];
-          return {
-            color: getViridisColor(v, minVal, maxVal),
-            weight: 4,    // 굵은 선
-            opacity: 1.0
-          };
-        },
+        style: f => ({
+          color: viridisByValue(f.properties[attr]),
+          weight: 4,
+          opacity: 1.0
+        }),
+
         onEachFeature: (feature, layer) => {
           layer.bindTooltip(
             `<b>${attr}</b>: ${feature.properties[attr]}`,
@@ -238,12 +152,14 @@
       }).addTo(map);
     }
 
-    //--------------------------------------------------------------------
-    // 6) 속성 선택 이벤트
-    //--------------------------------------------------------------------
-    document.getElementById("attrSelect").addEventListener("change", function() {
+    //----------------------------------------------------------------------
+    // dropdown 이벤트
+    //----------------------------------------------------------------------
+    document.getElementById("attrSel").addEventListener("change", function(){
       updateMap(this.value);
     });
+
   </script>
+
 </body>
 </html>
