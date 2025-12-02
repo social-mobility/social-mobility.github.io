@@ -103,11 +103,12 @@
 
   <!-- MAIN CONTENT -->
   <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
-    <h2><strong>Rail GIS Project11</strong></h2>
+    <h2><strong>Rail GIS Project_base</strong></h2>
     <p>Select an attribute to visualize Korean railway segments.</p>
 
     <label><b>Color by attribute:</b></label>
     <select id="attributeSelect">
+      <option value="RAILLINK_I">RAILLINK_I</option>
       <option value="route_count">route_count</option>
       <option value="curvature_R">curvature_R</option>
       <option value="elev_mean">elev_mean</option>
@@ -151,7 +152,7 @@
       return `rgb(${c[0]},${c[1]},${c[2]})`;
     }
 
-    fetch("projects/rail_dem_small2.geojson")
+    fetch("projects/base.geojson") // ################################################################################################################
       .then(res=>res.json())
       .then(data=>{
         geoData = data;
