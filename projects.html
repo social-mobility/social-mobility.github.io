@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publications | Social Mobility Group</title>
+  <title>Projects | Social Mobility Group</title>
+
   <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
   <style>
     body {
       font-family: 'Cabin', sans-serif;
@@ -21,16 +24,6 @@
       display: flex;
       align-items: center;
     }
-    .header-top .container {
-      height: 100%;
-      align-items: center;
-    }
-    .site-logo {
-      font-size: 1.5rem;
-      font-weight: 600;
-      line-height: 1.5;
-      color: #0c4a6e;
-    }
     .site-navbar {
       background: #cceeff;
       padding: 0.8rem 0;
@@ -40,108 +33,177 @@
       font-weight: 600;
       margin: 0 1rem;
     }
-    .site-navbar .nav-link:hover,
     .site-navbar .nav-link.active {
       text-decoration: underline;
       font-weight: 700;
     }
-    h1 {
-      font-size: 2rem;
-      margin: 2rem auto 1.5rem;
-      text-align: center;
-      color: #003e5c;
+
+    #map {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
     }
-    ul.publication-list {
-  padding: 0;
-  list-style: none;
-  max-width: 1000px;
-  margin: 2rem auto;
-}
 
-ul.publication-list > li {
-  padding: 1rem 1.2rem;
-  margin-bottom: 1rem;
-  line-height: 1.7;
-  background-color: #ffffff;
-  border-radius: 6px;
-  border-left: 4px solid #0077b6;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
+    /* ⭐ 배경지도 흐리게 */
+    .leaflet-tile {
+      filter: blur(2px) brightness(0.9);
+      -webkit-filter: blur(2px) brightness(0.9);
+    }
 
-ul.publication-list mark {
-  background-color: #e0f4ff;
-  color: #0077b6;
-  padding: 0 3px;
-  border-radius: 2px;
-}
-
-ul.publication-list em {
-  display: block;
-  font-style: italic;
-  color: #555;
-  margin-top: 4px;
-  font-size: 0.95rem;
-}
-  li em {
-    font-style: italic;
-    color: #555;
-  }
-    /* ✅ Mobile style 추가 */
-    @media (max-width: 768px) {
-      .header-top {
-        padding: 5px 10px;
-        height: auto;
-      }
-      .site-logo {
-        font-size: 1rem;
-        line-height: 1.0;
-        text-align: center;
-        word-break: keep-word;
-      }
-      .navbar-nav {
-        text-align: center;
-      }
+    #legend {
+      background:white;
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
     }
   </style>
 </head>
+
 <body>
+
+  <!-- HEADER -->
   <div class="header-top">
     <div class="container d-flex align-items-center">
       <a href="index.html">
-        <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
+        <img src="logo.png" alt="Logo" style="height:200px; margin-right:20px;">
       </a>
-            <div class="site-logo">
-              <!-- PC용 긴 문장 -->
-              <span class="d-none d-md-inline" style="color:#0077b6; font-weight: normal">
-                <b style="font-size: 1.4em;">So</b>cial <b style="font-size: 1.4em;">Mo</b>bility<br> Research Group
-                                              @ <b style="font-size: 1.4em;">Kyungil</b> University
-              </span>
-            
-              <!-- 모바일용 짧은 문장 -->
-              <span class="d-inline d-md-none" style="color:#0077b6; font-weight: bold">
-                @ <b style="font-size: 1.4em;">Kyungil University</b>
-              </span>
-            </div>
+      <div class="site-logo">
+        <span class="d-none d-md-inline" style="color:#0077b6; font-weight:normal;">
+          <b style="font-size:1.4em;">So</b>cial <bstyle="font-size:1.4em;">Mo</b> bility<br>
+          Research Group @ <b style="font-size:1.4em;">Kyungil</b> University
+        </span>
+        <span class="d-inline d-md-none" style="color:#0077b6; font-weight:bold;">
+          @ <b style="font-size:1.4em;">Kyungil University</b>
+        </span>
+      </div>
     </div>
   </div>
 
+  <!-- NAV -->
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="publications.html">Publication</a></li>
+          <li class="nav-item"><a class="nav-link" href="publications.html">Publication</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Group</a></li>
-          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
+
+  <!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT -->
+  <!-- MAIN CONTENT -->
+  <main style="max-width:1100px; margin:2rem auto; padding:0 1rem;">
+    <h2><strong>Rail GIS Project_base_joined</strong></h2>  
+    <p>Select an attribute to visualize Korean railway segments.</p>
+
+    <label><b>Color by attribute:</b></label>
+    <select id="attributeSelect">
+      <option value="route_count">route_count</option>
+      <option value="curvature_R">curvature_R</option>
+      <option value="elev_max">elev_max</option>
+      <option value="slope_pct">slope_pct</option>
+    </select>
+
+    <div id="map"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer text-center p-3" style="background:#e7f5ff;">
+    <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ----------------------------------------
+    // ⭐ 지도 초기화 + 한국 범위 제한
+    // ----------------------------------------
+    var map = L.map('map', {
+      minZoom: 6,
+      maxZoom: 12,
+      maxBounds: [[33.0, 124.0], [39.5, 132.0]],  // 한국 영역
+      maxBoundsViscosity: 1.0                     // 강하게 고정
+    }).setView([36.5, 128], 8);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    let geoData, geoLayer;
+
+    function viridis(t) {
+      const p = [
+        [253,231,37], [94,201,98], [33,145,140], [59,82,139], [68,1,84]
+      ];
+      let idx = Math.min(4, Math.floor(t*5));
+      let c = p[idx];
+      return `rgb(${c[0]},${c[1]},${c[2]})`;
+    }
+
+    fetch("projects/base_joined2.geojson") // ################################################################################################################
+      .then(res=>res.json())
+      .then(data=>{
+        geoData = data;
+        updateMap("route_count");
+      });
+
+    function updateMap(attr) {
+      if (geoLayer) geoLayer.remove();
+
+      const vals = geoData.features.map(f=>f.properties[attr]).filter(v=>v!=null);
+      const min = Math.min(...vals);
+      const max = Math.max(...vals);
+
+      geoLayer = L.geoJSON(geoData, {
+        style: f=>{
+          const v = f.properties[attr];
+          const t = (v - min)/(max - min);
+          return { color: viridis(t), weight:3 };
+        },
+        onEachFeature:(f,l)=>{
+          l.bindTooltip(`${attr}: ${f.properties[attr]}`,{sticky:true});
+        }
+      }).addTo(map);
+
+      updateLegend(attr,min,max);
+    }
+
+    function updateLegend(attr,min,max){
+      if (document.getElementById("legend")) document.getElementById("legend").remove();
+
+      const legend = L.control({position:"bottomright"});
+      legend.onAdd = function(){
+        const div = L.DomUtil.create("div");
+        div.id = "legend";
+        div.innerHTML = `
+          <b>${attr}</b><br>
+          <i style="background:${viridis(0)};width:20px;height:10px;display:inline-block"></i> ${min}<br>
+          <i style="background:${viridis(1)};width:20px;height:10px;display:inline-block"></i> ${max}<br>
+        `;
+        return div;
+      };
+      legend.addTo(map);
+    }
+
+    document.getElementById("attributeSelect")
+      .addEventListener("change", e => updateMap(e.target.value));
+  </script>
+
+</body>
+</html>
+
 
   <!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT --><!-- MAIN CONTENT -->
   <!-- MAIN CONTENT -->
