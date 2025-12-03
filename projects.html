@@ -177,8 +177,8 @@ ul.publication-list em {
     var map = L.map('map', {
       minZoom: 6,
       maxZoom: 12,
-      maxBounds: [[33.0, 124.0], [39.5, 132.0]],  // 한국 영역
-      maxBoundsViscosity: 1.0                     // 강하게 고정
+      maxBounds: [[33.0, 124.0], [39.5, 132.0]],
+      maxBoundsViscosity: 0.0
     }).setView([36.5, 128], 8);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
