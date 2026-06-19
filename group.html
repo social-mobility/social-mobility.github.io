@@ -410,6 +410,408 @@
   <div class="header-top">
     <div class="container">
 
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Group | Social Mobility Group</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap"
+    rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cabin', sans-serif;
+      color: #263238;
+      background-color: #f8f9fa;
+    }
+
+    .header-top {
+      height: 180px;
+      padding: 3px 20px;
+      display: flex;
+      align-items: center;
+      background-color: #e0f2ff;
+    }
+
+    .header-top .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo {
+      width: auto;
+      height: 200px;
+      margin-right: 20px;
+    }
+
+    .site-logo {
+      color: #0c4a6e;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .site-navbar {
+      padding: 0.8rem 0;
+      background-color: #cceeff;
+    }
+
+    .site-navbar .nav-link {
+      margin: 0 1rem;
+      color: #003e5c;
+      font-weight: 600;
+    }
+
+    .site-navbar .nav-link:hover,
+    .site-navbar .nav-link.active {
+      color: #003e5c;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .page-header {
+      padding: 3rem 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, #e0f2ff, #f8fcff);
+      border-bottom: 1px solid #d3ebf7;
+    }
+
+    .page-header h1 {
+      margin: 0 0 0.8rem;
+      color: #0c4a6e;
+      font-size: 2.3rem;
+      font-weight: 700;
+    }
+
+    .page-header p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #496774;
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .section-block {
+      margin-bottom: 4rem;
+    }
+
+    .section-heading {
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #b9e3f8;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      color: #0c4a6e;
+      font-size: 1.55rem;
+      font-weight: 700;
+    }
+
+    .section-heading p {
+      margin: 0.25rem 0 0;
+      color: #607d8b;
+      font-size: 0.95rem;
+    }
+
+    .member-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .member-item {
+      width: 240px;
+      max-width: 100%;
+    }
+
+    .member-card {
+      height: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 62, 92, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 62, 92, 0.12);
+    }
+
+    .member-photo-wrapper {
+      position: relative;
+      width: 100%;
+      height: 290px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #eef7fb;
+    }
+
+    .member-photo {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #7b9aaa;
+      background-color: #eef7fb;
+      font-size: 0.95rem;
+    }
+
+    .photo-placeholder i {
+      margin-bottom: 0.6rem;
+      color: #9ab9c8;
+      font-size: 3rem;
+    }
+
+    .member-content {
+      padding: 1rem;
+    }
+
+    .member-name {
+      margin: 0 0 0.3rem;
+      color: #0c4a6e;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .member-position {
+      margin-bottom: 0.7rem;
+      color: #4d6a78;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .member-research {
+      min-height: 84px;
+      margin-bottom: 1rem;
+      color: #596b73;
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .member-links a {
+      margin-right: 0.65rem;
+      color: #0077b6;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    .member-links a:hover {
+      color: #004f73;
+    }
+
+    .institution-category {
+      margin-bottom: 2.8rem;
+    }
+
+    .institution-category-title {
+      margin: 0 0 1rem;
+      color: #0c4a6e;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .institution-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .institution-card {
+      min-height: 175px;
+      padding: 14px 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      background-color: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 62, 92, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .institution-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 16px rgba(0, 62, 92, 0.1);
+    }
+
+    .institution-logo-wrapper {
+      width: 100%;
+      height: 115px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .institution-card img {
+      width: 100%;
+      height: 108px;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .institution-name {
+      margin-top: 8px;
+      color: #334e5c;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .institution-placeholder {
+      display: none;
+      color: #607d8b;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .collaboration-note {
+      margin-top: 1.5rem;
+      padding: 1.1rem 1.3rem;
+      color: #46616d;
+      line-height: 1.6;
+      background-color: #eef8fd;
+      border-left: 4px solid #55b6df;
+      border-radius: 5px;
+    }
+
+    .footer {
+      color: #385563;
+      background-color: #e7f5ff;
+    }
+
+    @media (max-width: 992px) {
+      .institution-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-top {
+        height: auto;
+        padding: 5px 10px;
+      }
+
+      .header-logo {
+        height: 110px;
+        margin-right: 8px;
+      }
+
+      .site-logo {
+        font-size: 1rem;
+        line-height: 1;
+        text-align: center;
+        word-break: keep-word;
+      }
+
+      .navbar-nav {
+        text-align: center;
+      }
+
+      .page-header {
+        padding: 2.4rem 1rem;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .member-grid {
+        justify-content: center;
+      }
+
+      .member-item {
+        width: 250px;
+      }
+
+      .member-photo-wrapper {
+        height: 300px;
+      }
+
+      .institution-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .institution-card {
+        min-height: 165px;
+        padding: 12px 10px 10px;
+      }
+
+      .institution-logo-wrapper {
+        height: 105px;
+      }
+
+      .institution-card img {
+        height: 98px;
+      }
+
+      .institution-name {
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .institution-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .institution-card {
+        width: 100%;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="header-top">
+    <div class="container">
+
 
   <a href="index.html">
     <img
@@ -772,7 +1174,7 @@
         </div>
       </div>
 
-     <div class="institution-card">
+      <div class="institution-card">
         <div class="institution-logo-wrapper">
           <img
             src="picture/hanyang-logo.png"
@@ -967,6 +1369,11 @@
           </div>
         </div>
 
+        <div class="institution-name">
+          Georgia Institute of Technology
+        </div>
+      </div>
+
       <div class="institution-card">
         <div class="institution-logo-wrapper">
           <img
@@ -987,7 +1394,7 @@
           Massachusetts Institute of Technology
         </div>
       </div>
-        
+
       <div class="institution-card">
         <div class="institution-logo-wrapper">
           <img
