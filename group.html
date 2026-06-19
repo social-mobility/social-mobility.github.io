@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
   <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
 
@@ -9,15 +10,24 @@
 
   <title>Group | Social Mobility Group</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap"
+    rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <style>
     body {
+      margin: 0;
       font-family: 'Cabin', sans-serif;
-      background-color: #f8f9fa;
       color: #263238;
+      background-color: #f8f9fa;
     }
 
     /* Header */
@@ -31,12 +41,13 @@
 
     .header-top .container {
       height: 100%;
+      display: flex;
       align-items: center;
     }
 
     .header-logo {
-      height: 200px;
       width: auto;
+      height: 200px;
       margin-right: 20px;
     }
 
@@ -50,7 +61,7 @@
     /* Navigation */
     .site-navbar {
       padding: 0.8rem 0;
-      background: #cceeff;
+      background-color: #cceeff;
     }
 
     .site-navbar .nav-link {
@@ -61,11 +72,12 @@
 
     .site-navbar .nav-link:hover,
     .site-navbar .nav-link.active {
+      color: #003e5c;
       font-weight: 700;
       text-decoration: underline;
     }
 
-    /* Page introduction */
+    /* Page header */
     .page-header {
       padding: 3rem 1rem;
       text-align: center;
@@ -74,8 +86,9 @@
     }
 
     .page-header h1 {
-      margin-bottom: 0.8rem;
+      margin: 0 0 0.8rem;
       color: #0c4a6e;
+      font-size: 2.3rem;
       font-weight: 700;
     }
 
@@ -117,7 +130,7 @@
       font-size: 0.95rem;
     }
 
-    /* Member grid */
+    /* Member cards */
     .member-grid {
       display: flex;
       flex-wrap: wrap;
@@ -126,14 +139,14 @@
     }
 
     .member-item {
-      width: 255px;
+      width: 240px;
       max-width: 100%;
     }
 
     .member-card {
       height: 100%;
       overflow: hidden;
-      background: #ffffff;
+      background-color: #ffffff;
       border: 1px solid #dce9ef;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0, 62, 92, 0.06);
@@ -145,16 +158,15 @@
       box-shadow: 0 8px 18px rgba(0, 62, 92, 0.12);
     }
 
-    /* Portrait photo */
     .member-photo-wrapper {
       position: relative;
       width: 100%;
-      height: 280px;
+      height: 290px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #eef7fb;
+      background-color: #eef7fb;
     }
 
     .member-photo {
@@ -173,7 +185,7 @@
       justify-content: center;
       flex-direction: column;
       color: #7b9aaa;
-      background: #eef7fb;
+      background-color: #eef7fb;
       font-size: 0.95rem;
     }
 
@@ -188,9 +200,9 @@
     }
 
     .member-name {
-      margin-bottom: 0.3rem;
+      margin: 0 0 0.3rem;
       color: #0c4a6e;
-      font-size: 1.12rem;
+      font-size: 1.1rem;
       font-weight: 700;
     }
 
@@ -220,22 +232,20 @@
       color: #004f73;
     }
 
-    /* Collaborating institutions */
+    /* Institution logos */
     .institution-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .institution-card {
-      width: 240px;
       height: 135px;
       padding: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #ffffff;
+      background-color: #ffffff;
       border: 1px solid #dce9ef;
       border-radius: 10px;
       box-shadow: 0 3px 10px rgba(0, 62, 92, 0.05);
@@ -249,13 +259,16 @@
 
     .institution-card img {
       width: 100%;
-      height: 100%;
+      height: 85px;
+      display: block;
       object-fit: contain;
+      object-position: center;
     }
 
     .institution-placeholder {
+      display: none;
       color: #607d8b;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       text-align: center;
     }
@@ -265,14 +278,22 @@
       padding: 1.1rem 1.3rem;
       color: #46616d;
       line-height: 1.6;
-      background: #eef8fd;
+      background-color: #eef8fd;
       border-left: 4px solid #55b6df;
       border-radius: 5px;
     }
 
+    /* Footer */
     .footer {
       color: #385563;
-      background: #e7f5ff;
+      background-color: #e7f5ff;
+    }
+
+    /* Tablet */
+    @media (max-width: 992px) {
+      .institution-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     /* Mobile */
@@ -311,19 +332,34 @@
       }
 
       .member-item {
-        width: 280px;
+        width: 250px;
       }
 
       .member-photo-wrapper {
-        height: 310px;
+        height: 300px;
       }
 
       .institution-grid {
-        justify-content: center;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .institution-card {
-        width: 280px;
+        height: 115px;
+        padding: 15px;
+      }
+
+      .institution-card img {
+        height: 72px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .institution-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .institution-card {
+        width: 100%;
       }
     }
   </style>
@@ -335,7 +371,7 @@
   <!-- Header -->
 
   <div class="header-top">
-    <div class="container d-flex align-items-center">
+    <div class="container">
 
 ```
   <a href="index.html">
@@ -396,23 +432,33 @@
     <ul class="navbar-nav ml-auto">
 
       <li class="nav-item">
-        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="index.html">
+          Home
+        </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="publications.html">Publication</a>
+        <a class="nav-link" href="publications.html">
+          Publication
+        </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link active" href="group.html">Group</a>
+        <a class="nav-link active" href="group.html">
+          Group
+        </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="projects.html">
+          Projects
+        </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact</a>
+        <a class="nav-link" href="#">
+          Contact
+        </a>
       </li>
 
     </ul>
@@ -422,7 +468,7 @@
 
   </nav>
 
-  <!-- Introduction -->
+  <!-- Page introduction -->
 
   <section class="page-header">
 
@@ -451,7 +497,7 @@
 
   <div class="member-grid">
 
-    <!-- Eun Hak Lee -->
+    <!-- Dr. Eun Hak Lee -->
     <div class="member-item">
 
       <div class="member-card">
@@ -459,10 +505,13 @@
         <div class="member-photo-wrapper">
 
           <img
-            src="faculty.jpg"
+            src="faculty1.jpg"
             alt="Dr. Eun Hak Lee"
             class="member-photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='flex';
+            ">
 
           <div class="photo-placeholder">
             <i class="fas fa-user"></i>
@@ -531,10 +580,13 @@
         <div class="member-photo-wrapper">
 
           <img
-            src="member2.jpg"
+            src="picture/member2.jpg"
             alt="Member Name"
             class="member-photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='flex';
+            ">
 
           <div class="photo-placeholder">
             <i class="fas fa-user"></i>
@@ -578,10 +630,13 @@
         <div class="member-photo-wrapper">
 
           <img
-            src="member3.jpg"
+            src="picture/member3.jpg"
             alt="Member Name"
             class="member-photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='flex';
+            ">
 
           <div class="photo-placeholder">
             <i class="fas fa-user"></i>
@@ -633,42 +688,176 @@
     <!-- Seoul National University -->
     <div class="institution-card">
       <img
-        src="snu-logo.png"
+        src="picture/snu-logo.png"
         alt="Seoul National University"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        title="Seoul National University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
 
-      <div
-        class="institution-placeholder"
-        style="display:none;">
+      <div class="institution-placeholder">
         Seoul National University
       </div>
     </div>
 
-    <!-- Texas A&M Transportation Institute -->
+    <!-- Hanyang University -->
     <div class="institution-card">
       <img
-        src="tti-logo.png"
-        alt="Texas A&M Transportation Institute"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        src="picture/hanyang-logo.png"
+        alt="Hanyang University"
+        title="Hanyang University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
 
-      <div
-        class="institution-placeholder"
-        style="display:none;">
-        Texas A&amp;M Transportation Institute
+      <div class="institution-placeholder">
+        Hanyang University
       </div>
     </div>
 
-    <!-- Additional institution -->
+    <!-- Keimyung University -->
     <div class="institution-card">
       <img
-        src="partner-logo1.png"
-        alt="Partner Institution"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        src="picture/keimyung-logo.png"
+        alt="Keimyung University"
+        title="Keimyung University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
 
-      <div
-        class="institution-placeholder"
-        style="display:none;">
-        Partner Institution
+      <div class="institution-placeholder">
+        Keimyung University
+      </div>
+    </div>
+
+    <!-- Yeungnam University -->
+    <div class="institution-card">
+      <img
+        src="picture/yeungnam-logo.png"
+        alt="Yeungnam University"
+        title="Yeungnam University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Yeungnam University
+      </div>
+    </div>
+
+    <!-- Kyungpook National University -->
+    <div class="institution-card">
+      <img
+        src="picture/knu-logo.png"
+        alt="Kyungpook National University"
+        title="Kyungpook National University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Kyungpook National University
+      </div>
+    </div>
+
+    <!-- Texas A&M University -->
+    <div class="institution-card">
+      <img
+        src="picture/tamu-logo.png"
+        alt="Texas A&amp;M University"
+        title="Texas A&amp;M University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Texas A&amp;M University
+      </div>
+    </div>
+
+    <!-- Purdue University -->
+    <div class="institution-card">
+      <img
+        src="picture/purdue-logo.jpg.png"
+        alt="Purdue University"
+        title="Purdue University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Purdue University
+      </div>
+    </div>
+
+    <!-- Yonsei University -->
+    <div class="institution-card">
+      <img
+        src="picture/yonsei-logo.png"
+        alt="Yonsei University"
+        title="Yonsei University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Yonsei University
+      </div>
+    </div>
+
+    <!-- Korea University -->
+    <div class="institution-card">
+      <img
+        src="picture/korea-logo.png"
+        alt="Korea University"
+        title="Korea University"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Korea University
+      </div>
+    </div>
+
+    <!-- University of North Texas -->
+    <div class="institution-card">
+      <img
+        src="picture/north-texas-logo.png"
+        alt="University of North Texas"
+        title="University of North Texas"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        University of North Texas
+      </div>
+    </div>
+
+    <!-- Austin institution -->
+    <div class="institution-card">
+      <img
+        src="picture/austin-logo.png"
+        alt="Austin Partner Institution"
+        title="Austin Partner Institution"
+        onerror="
+          this.style.display='none';
+          this.nextElementSibling.style.display='block';
+        ">
+
+      <div class="institution-placeholder">
+        Austin Partner Institution
       </div>
     </div>
 
