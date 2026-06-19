@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Contact | Social Mobility Group</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap"
+    rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cabin', sans-serif;
+      color: #263238;
+      background-color: #f8f9fa;
+    }
+
+    /* Header */
+    .header-top {
+      height: 180px;
+      padding: 3px 20px;
+      display: flex;
+      align-items: center;
+      background-color: #e0f2ff;
+    }
+
+    .header-top .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-logo {
+      width: auto;
+      height: 200px;
+      margin-right: 20px;
+    }
+
+    .site-logo {
+      color: #0c4a6e;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* Navigation */
+    .site-navbar {
+      padding: 0.8rem 0;
+      background-color: #cceeff;
+    }
+
+    .site-navbar .nav-link {
+      margin: 0 1rem;
+      color: #003e5c;
+      font-weight: 600;
+    }
+
+    .site-navbar .nav-link:hover,
+    .site-navbar .nav-link.active {
+      color: #003e5c;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: 3rem 1rem;
+      text-align: center;
+      background: linear-gradient(135deg, #e0f2ff, #f8fcff);
+      border-bottom: 1px solid #d3ebf7;
+    }
+
+    .page-header h1 {
+      margin: 0 0 0.8rem;
+      color: #0c4a6e;
+      font-size: 2.3rem;
+      font-weight: 700;
+    }
+
+    .page-header p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: #496774;
+      font-size: 1.02rem;
+      line-height: 1.65;
+    }
+
+    /* Main */
+    main {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .section-heading {
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #b9e3f8;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      color: #0c4a6e;
+      font-size: 1.55rem;
+      font-weight: 700;
+    }
+
+    .section-heading p {
+      margin: 0.25rem 0 0;
+      color: #607d8b;
+      font-size: 0.95rem;
+    }
+
+    /* Contact layout */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      height: 100%;
+      padding: 1.8rem;
+      background-color: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0, 62, 92, 0.07);
+    }
+
+    .contact-card h3 {
+      margin: 0 0 1.3rem;
+      color: #0c4a6e;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0077b6;
+      background-color: #e8f6fd;
+      border-radius: 50%;
+      font-size: 1rem;
+    }
+
+    .contact-text {
+      color: #455a64;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .contact-text strong {
+      display: block;
+      margin-bottom: 0.15rem;
+      color: #263238;
+    }
+
+    .contact-text a {
+      color: #0077b6;
+      text-decoration: none;
+    }
+
+    .contact-text a:hover {
+      color: #004f73;
+      text-decoration: underline;
+    }
+
+    .map-button {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 0.7rem;
+      padding: 0.7rem 1rem;
+      color: #ffffff;
+      background-color: #0077b6;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .map-button i {
+      margin-right: 0.5rem;
+    }
+
+    .map-button:hover {
+      color: #ffffff;
+      background-color: #005f8f;
+      text-decoration: none;
+    }
+
+    /* Map */
+    .map-card {
+      min-height: 470px;
+      overflow: hidden;
+      background-color: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0, 62, 92, 0.07);
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 470px;
+      display: block;
+      border: 0;
+    }
+
+    .location-note {
+      margin-top: 1.5rem;
+      padding: 1.1rem 1.3rem;
+      color: #46616d;
+      line-height: 1.6;
+      background-color: #eef8fd;
+      border-left: 4px solid #55b6df;
+      border-radius: 5px;
+    }
+
+    /* Footer */
+    .footer {
+      color: #385563;
+      background-color: #e7f5ff;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .header-top {
+        height: auto;
+        padding: 5px 10px;
+      }
+
+      .header-logo {
+        height: 110px;
+        margin-right: 8px;
+      }
+
+      .site-logo {
+        font-size: 1rem;
+        line-height: 1;
+        text-align: center;
+        word-break: keep-word;
+      }
+
+      .navbar-nav {
+        text-align: center;
+      }
+
+      .page-header {
+        padding: 2.4rem 1rem;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 1.4rem;
+      }
+
+      .map-card,
+      .map-card iframe {
+        min-height: 360px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Header -->
+
+  <div class="header-top">
+    <div class="container">
+
+```
+  <a href="index.html">
+    <img
+      src="logo.png"
+      alt="Social Mobility Group Logo"
+      class="header-logo">
+  </a>
+
+  <div class="site-logo">
+
+    <span
+      class="d-none d-md-inline"
+      style="color:#0077b6; font-weight:normal;">
+
+      <b style="font-size:1.4em;">So</b>cial
+      <b style="font-size:1.4em;">Mo</b>bility<br>
+
+      Research Group
+      @ <b style="font-size:1.4em;">Kyungil</b> University
+    </span>
+
+    <span
+      class="d-inline d-md-none"
+      style="color:#0077b6; font-weight:bold;">
+
+      @ <b style="font-size:1.4em;">Kyungil University</b>
+    </span>
+
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- Navigation -->
+
+  <nav class="site-navbar navbar navbar-expand-lg navbar-light">
+    <div class="container">
+
+```
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse justify-content-end"
+    id="navbarNav">
+
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="publications.html">Publication</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="group.html">Group</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="projects.html">Projects</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link active" href="contact.html">Contact</a>
+      </li>
+
+    </ul>
+  </div>
+</div>
+```
+
+  </nav>
+
+  <!-- Page introduction -->
+
+  <section class="page-header">
+
+```
+<h1>Contact</h1>
+
+<p>
+  Contact the Social Mobility Research Group at Kyungil University
+  for academic collaboration, research projects, and student opportunities.
+</p>
+```
+
+  </section>
+
+  <main>
+
+```
+<div class="section-heading">
+  <h2>Location &amp; Contact</h2>
+  <p>School of Railway Operation Systems, Kyungil University</p>
+</div>
+
+<div class="contact-layout">
+
+  <!-- Contact information -->
+  <div class="contact-card">
+
+    <h3>Social Mobility Research Group</h3>
+
+    <div class="contact-item">
+
+      <div class="contact-icon">
+        <i class="fas fa-university"></i>
+      </div>
+
+      <div class="contact-text">
+        <strong>Affiliation</strong>
+        School of Railway Operation Systems<br>
+        Kyungil University
+      </div>
+
+    </div>
+
+    <div class="contact-item">
+
+      <div class="contact-icon">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+
+      <div class="contact-text">
+        <strong>Address</strong>
+        50 Gamasil-gil, Hayang-eup,<br>
+        Gyeongsan-si, Gyeongsangbuk-do,<br>
+        Republic of Korea
+        <br><br>
+        경상북도 경산시 하양읍 가마실길 50
+      </div>
+
+    </div>
+
+    <div class="contact-item">
+
+      <div class="contact-icon">
+        <i class="fas fa-envelope"></i>
+      </div>
+
+      <div class="contact-text">
+        <strong>Email</strong>
+        <a href="mailto:eunhak@kiu.kr">
+          eunhak@kiu.kr
+        </a>
+      </div>
+
+    </div>
+
+    <a
+      class="map-button"
+      href="https://www.google.com/maps/search/?api=1&query=경일대학교+경상북도+경산시+하양읍+가마실길+50"
+      target="_blank"
+      rel="noopener noreferrer">
+
+      <i class="fas fa-directions"></i>
+      Open in Google Maps
+    </a>
+
+  </div>
+
+  <!-- Google map -->
+  <div class="map-card">
+
+    <iframe
+      src="https://www.google.com/maps?q=경일대학교%20경상북도%20경산시%20하양읍%20가마실길%2050&output=embed"
+      title="Kyungil University Map"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+</div>
+
+<div class="location-note">
+  The Social Mobility Research Group is based in the
+  School of Railway Operation Systems at Kyungil University,
+  Gyeongsan, South Korea.
+</div>
+```
+
+  </main>
+
+  <!-- Footer -->
+
+  <footer class="footer text-center p-3">
+
+```
+<p class="mb-0">
+  &copy;
+  <span id="year"></span>
+  Social Mobility Group. All rights reserved.
+</p>
+```
+
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
