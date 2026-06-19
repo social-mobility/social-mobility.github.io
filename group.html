@@ -246,9 +246,27 @@
 
     /* Institution logos */
     .institution-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    }
+    
+    .institution-card {
+    min-height: 150px;
+    padding: 15px 12px 12px;
+    }
+    
+    .institution-logo-wrapper {
+    height: 82px;
+    }
+    
+    .institution-card img {
+    height: 72px;
+    }
+    
+    .institution-name {
+    margin-top: 10px;
+    font-size: 0.86rem;
     }
 
     .institution-card {
@@ -322,10 +340,39 @@
 
     /* Tablet */
     @media (max-width: 992px) {
-      .institution-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+.institution-grid {
+grid-template-columns: repeat(3, 1fr);
+}
+}
+
+@media (max-width: 768px) {
+.institution-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.institution-card {
+min-height: 145px;
+padding: 14px 10px 10px;
+}
+
+.institution-logo-wrapper {
+height: 78px;
+}
+
+.institution-card img {
+height: 68px;
+}
+
+.institution-name {
+font-size: 0.84rem;
+}
+}
+
+@media (max-width: 480px) {
+.institution-grid {
+grid-template-columns: 1fr;
+}
+}
 
     /* Mobile */
     @media (max-width: 768px) {
@@ -542,7 +589,7 @@
         <div class="member-photo-wrapper">
 
           <img
-            src="faculty.png"
+            src="faculty.jpg"
             alt="Dr. Eun Hak Lee"
             class="member-photo"
             onerror="
@@ -1026,7 +1073,7 @@
   </div>
 
 </section>
-```
+
 
   </main>
 
@@ -1034,13 +1081,13 @@
 
   <footer class="footer text-center p-3">
 
-```
+
 <p class="mb-0">
   &copy;
   <span id="year"></span>
   Social Mobility Group. All rights reserved.
 </p>
-```
+
 
   </footer>
 
