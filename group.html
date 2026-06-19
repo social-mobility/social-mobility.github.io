@@ -22,11 +22,11 @@
 
     /* Header */
     .header-top {
-      background-color: #e0f2ff;
-      padding: 3px 20px;
       height: 180px;
+      padding: 3px 20px;
       display: flex;
       align-items: center;
+      background-color: #e0f2ff;
     }
 
     .header-top .container {
@@ -41,35 +41,35 @@
     }
 
     .site-logo {
+      color: #0c4a6e;
       font-size: 1.5rem;
       font-weight: 600;
       line-height: 1.5;
-      color: #0c4a6e;
     }
 
     /* Navigation */
     .site-navbar {
-      background: #cceeff;
       padding: 0.8rem 0;
+      background: #cceeff;
     }
 
     .site-navbar .nav-link {
+      margin: 0 1rem;
       color: #003e5c;
       font-weight: 600;
-      margin: 0 1rem;
     }
 
     .site-navbar .nav-link:hover,
     .site-navbar .nav-link.active {
-      text-decoration: underline;
       font-weight: 700;
+      text-decoration: underline;
     }
 
-    /* Page heading */
+    /* Page introduction */
     .page-header {
-      background: linear-gradient(135deg, #e0f2ff, #f8fcff);
       padding: 3rem 1rem;
       text-align: center;
+      background: linear-gradient(135deg, #e0f2ff, #f8fcff);
       border-bottom: 1px solid #d3ebf7;
     }
 
@@ -87,57 +87,49 @@
       line-height: 1.65;
     }
 
-    /* Main content */
+    /* Main */
     main {
       max-width: 1100px;
       margin: 3rem auto;
       padding: 0 1rem;
     }
 
-    .institution-section {
+    .section-block {
       margin-bottom: 4rem;
     }
 
-    .institution-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .section-heading {
       padding-bottom: 0.8rem;
       margin-bottom: 1.5rem;
       border-bottom: 2px solid #b9e3f8;
     }
 
-    .institution-badge {
-      width: 58px;
-      height: 58px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #e0f2ff;
-      border: 1px solid #b9e3f8;
-      border-radius: 10px;
-      color: #0077b6;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-align: center;
-      line-height: 1.1;
-    }
-
-    .institution-title {
+    .section-heading h2 {
       margin: 0;
       color: #0c4a6e;
       font-size: 1.55rem;
       font-weight: 700;
     }
 
-    .institution-subtitle {
-      margin: 0.2rem 0 0;
+    .section-heading p {
+      margin: 0.25rem 0 0;
       color: #607d8b;
       font-size: 0.95rem;
     }
 
-    /* Member card */
+    /* Member grid */
+    .member-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .member-item {
+      width: 255px;
+      max-width: 100%;
+    }
+
     .member-card {
       height: 100%;
       overflow: hidden;
@@ -153,11 +145,11 @@
       box-shadow: 0 8px 18px rgba(0, 62, 92, 0.12);
     }
 
-    /* Photo area */
+    /* Portrait photo */
     .member-photo-wrapper {
       position: relative;
       width: 100%;
-      height: 300px;
+      height: 280px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -169,9 +161,8 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: contain;
-      object-position: center;
-      background: #ffffff;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .photo-placeholder {
@@ -181,47 +172,47 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background: #eef7fb;
       color: #7b9aaa;
+      background: #eef7fb;
       font-size: 0.95rem;
     }
 
     .photo-placeholder i {
       margin-bottom: 0.6rem;
-      font-size: 3rem;
       color: #9ab9c8;
+      font-size: 3rem;
     }
 
     .member-content {
-      padding: 1.2rem;
+      padding: 1rem;
     }
 
     .member-name {
       margin-bottom: 0.3rem;
       color: #0c4a6e;
-      font-size: 1.25rem;
+      font-size: 1.12rem;
       font-weight: 700;
     }
 
     .member-position {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.7rem;
       color: #4d6a78;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
     }
 
     .member-research {
-      min-height: 72px;
+      min-height: 84px;
       margin-bottom: 1rem;
       color: #596b73;
-      font-size: 0.94rem;
+      font-size: 0.88rem;
       line-height: 1.55;
     }
 
     .member-links a {
-      margin-right: 0.7rem;
+      margin-right: 0.65rem;
       color: #0077b6;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       text-decoration: none;
     }
 
@@ -229,19 +220,59 @@
       color: #004f73;
     }
 
+    /* Collaborating institutions */
+    .institution-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .institution-card {
+      width: 240px;
+      height: 135px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 62, 92, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .institution-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 16px rgba(0, 62, 92, 0.1);
+    }
+
+    .institution-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .institution-placeholder {
+      color: #607d8b;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
     .collaboration-note {
-      margin-top: 1rem;
-      padding: 1.2rem 1.4rem;
+      margin-top: 1.5rem;
+      padding: 1.1rem 1.3rem;
+      color: #46616d;
+      line-height: 1.6;
       background: #eef8fd;
       border-left: 4px solid #55b6df;
       border-radius: 5px;
-      color: #46616d;
-      line-height: 1.6;
     }
 
     .footer {
-      background: #e7f5ff;
       color: #385563;
+      background: #e7f5ff;
     }
 
     /* Mobile */
@@ -275,18 +306,24 @@
         font-size: 2rem;
       }
 
-      .institution-badge {
-        width: 48px;
-        height: 48px;
-        font-size: 0.75rem;
+      .member-grid {
+        justify-content: center;
       }
 
-      .institution-title {
-        font-size: 1.25rem;
+      .member-item {
+        width: 280px;
       }
 
       .member-photo-wrapper {
-        height: 320px;
+        height: 310px;
+      }
+
+      .institution-grid {
+        justify-content: center;
+      }
+
+      .institution-card {
+        width: 280px;
       }
     }
   </style>
@@ -310,7 +347,6 @@
 
   <div class="site-logo">
 
-    <!-- Desktop -->
     <span
       class="d-none d-md-inline"
       style="color:#0077b6; font-weight:normal;">
@@ -322,7 +358,6 @@
       @ <b style="font-size:1.4em;">Kyungil</b> University
     </span>
 
-    <!-- Mobile -->
     <span
       class="d-inline d-md-none"
       style="color:#0077b6; font-weight:bold;">
@@ -387,7 +422,7 @@
 
   </nav>
 
-  <!-- Page introduction -->
+  <!-- Introduction -->
 
   <section class="page-header">
 
@@ -395,10 +430,9 @@
 <h1>Our Group</h1>
 
 <p>
-  The Social Mobility Research Group brings together researchers and
-  collaborators from universities and research institutions to address
-  transportation, mobility, railway, and urban challenges using
-  data-driven and artificial intelligence-based approaches.
+  The Social Mobility Research Group explores transportation,
+  public transit, railway systems, social mobility, mobility big data,
+  and artificial intelligence-based transportation analysis.
 </p>
 ```
 
@@ -407,31 +441,18 @@
   <main>
 
 ```
-<!-- Kyungil University -->
-<section class="institution-section">
+<!-- Group members -->
+<section class="section-block">
 
-  <div class="institution-header">
-
-    <div class="institution-badge">
-      KIU
-    </div>
-
-    <div>
-      <h2 class="institution-title">
-        Kyungil University
-      </h2>
-
-      <p class="institution-subtitle">
-        Social Mobility Research Group
-      </p>
-    </div>
-
+  <div class="section-heading">
+    <h2>Group Members</h2>
+    <p>Social Mobility Research Group at Kyungil University</p>
   </div>
 
-  <div class="row">
+  <div class="member-grid">
 
     <!-- Eun Hak Lee -->
-    <div class="col-lg-4 col-md-6 mb-4">
+    <div class="member-item">
 
       <div class="member-card">
 
@@ -470,7 +491,6 @@
             <a
               href="mailto:eunhak@kiu.kr"
               title="Email">
-
               <i class="fas fa-envelope"></i>
             </a>
 
@@ -479,7 +499,6 @@
               target="_blank"
               rel="noopener noreferrer"
               title="Google Scholar">
-
               <i class="fas fa-graduation-cap"></i>
             </a>
 
@@ -488,7 +507,6 @@
               target="_blank"
               rel="noopener noreferrer"
               title="LinkedIn">
-
               <i class="fab fa-linkedin"></i>
             </a>
 
@@ -497,7 +515,6 @@
               target="_blank"
               rel="noopener noreferrer"
               title="GitHub">
-
               <i class="fab fa-github"></i>
             </a>
 
@@ -507,7 +524,7 @@
     </div>
 
     <!-- Member 2 -->
-    <div class="col-lg-4 col-md-6 mb-4">
+    <div class="member-item">
 
       <div class="member-card">
 
@@ -545,15 +562,7 @@
             <a
               href="mailto:email@example.com"
               title="Email">
-
               <i class="fas fa-envelope"></i>
-            </a>
-
-            <a
-              href="#"
-              title="Google Scholar">
-
-              <i class="fas fa-graduation-cap"></i>
             </a>
 
           </div>
@@ -562,7 +571,7 @@
     </div>
 
     <!-- Member 3 -->
-    <div class="col-lg-4 col-md-6 mb-4">
+    <div class="member-item">
 
       <div class="member-card">
 
@@ -600,7 +609,6 @@
             <a
               href="mailto:email@example.com"
               title="Email">
-
               <i class="fas fa-envelope"></i>
             </a>
 
@@ -612,269 +620,64 @@
   </div>
 </section>
 
-<!-- Seoul National University -->
-<section class="institution-section">
+<!-- Collaborating institutions -->
+<section class="section-block">
 
-  <div class="institution-header">
+  <div class="section-heading">
+    <h2>Collaborating Institutions</h2>
+    <p>Academic and professional research partners</p>
+  </div>
 
-    <div class="institution-badge">
-      SNU
-    </div>
+  <div class="institution-grid">
 
-    <div>
-      <h2 class="institution-title">
+    <!-- Seoul National University -->
+    <div class="institution-card">
+      <img
+        src="snu-logo.png"
+        alt="Seoul National University"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+
+      <div
+        class="institution-placeholder"
+        style="display:none;">
         Seoul National University
-      </h2>
-
-      <p class="institution-subtitle">
-        Academic Collaboration
-      </p>
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <!-- SNU Collaborator -->
-    <div class="col-lg-4 col-md-6 mb-4">
-
-      <div class="member-card">
-
-        <div class="member-photo-wrapper">
-
-          <img
-            src="snu-member1.jpg"
-            alt="Collaborator Name"
-            class="member-photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-
-          <div class="photo-placeholder">
-            <i class="fas fa-user"></i>
-            <span>Photo</span>
-          </div>
-
-        </div>
-
-        <div class="member-content">
-
-          <h3 class="member-name">
-            Collaborator Name
-          </h3>
-
-          <div class="member-position">
-            Professor
-          </div>
-
-          <p class="member-research">
-            Transportation engineering, urban mobility, and data-driven
-            transportation systems.
-          </p>
-
-          <div class="member-links">
-
-            <a
-              href="mailto:email@example.com"
-              title="Email">
-
-              <i class="fas fa-envelope"></i>
-            </a>
-
-            <a
-              href="#"
-              title="Google Scholar">
-
-              <i class="fas fa-graduation-cap"></i>
-            </a>
-
-            <a
-              href="#"
-              title="Homepage">
-
-              <i class="fas fa-globe"></i>
-            </a>
-
-          </div>
-        </div>
       </div>
     </div>
 
-  </div>
-</section>
+    <!-- Texas A&M Transportation Institute -->
+    <div class="institution-card">
+      <img
+        src="tti-logo.png"
+        alt="Texas A&M Transportation Institute"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
 
-<!-- Texas A&M Transportation Institute -->
-<section class="institution-section">
-
-  <div class="institution-header">
-
-    <div class="institution-badge">
-      TTI
-    </div>
-
-    <div>
-      <h2 class="institution-title">
+      <div
+        class="institution-placeholder"
+        style="display:none;">
         Texas A&amp;M Transportation Institute
-      </h2>
-
-      <p class="institution-subtitle">
-        International Research Collaboration
-      </p>
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <!-- TTI Collaborator -->
-    <div class="col-lg-4 col-md-6 mb-4">
-
-      <div class="member-card">
-
-        <div class="member-photo-wrapper">
-
-          <img
-            src="tti-member1.jpg"
-            alt="Collaborator Name"
-            class="member-photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-
-          <div class="photo-placeholder">
-            <i class="fas fa-user"></i>
-            <span>Photo</span>
-          </div>
-
-        </div>
-
-        <div class="member-content">
-
-          <h3 class="member-name">
-            Collaborator Name
-          </h3>
-
-          <div class="member-position">
-            Research Scientist
-          </div>
-
-          <p class="member-research">
-            Multimodal transportation planning, transit accessibility,
-            transportation equity, and mobility analysis.
-          </p>
-
-          <div class="member-links">
-
-            <a
-              href="mailto:email@example.com"
-              title="Email">
-
-              <i class="fas fa-envelope"></i>
-            </a>
-
-            <a
-              href="#"
-              title="Google Scholar">
-
-              <i class="fas fa-graduation-cap"></i>
-            </a>
-
-            <a
-              href="#"
-              title="Institutional Profile">
-
-              <i class="fas fa-building"></i>
-            </a>
-
-          </div>
-        </div>
       </div>
     </div>
 
-  </div>
-</section>
+    <!-- Additional institution -->
+    <div class="institution-card">
+      <img
+        src="partner-logo1.png"
+        alt="Partner Institution"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
 
-<!-- Other Collaborating Institutions -->
-<section class="institution-section">
-
-  <div class="institution-header">
-
-    <div class="institution-badge">
-      PARTNER
-    </div>
-
-    <div>
-      <h2 class="institution-title">
-        Other Collaborating Institutions
-      </h2>
-
-      <p class="institution-subtitle">
-        Research Partners and Professional Collaborators
-      </p>
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <!-- Other Collaborator -->
-    <div class="col-lg-4 col-md-6 mb-4">
-
-      <div class="member-card">
-
-        <div class="member-photo-wrapper">
-
-          <img
-            src="collaborator1.jpg"
-            alt="Collaborator Name"
-            class="member-photo"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-
-          <div class="photo-placeholder">
-            <i class="fas fa-user"></i>
-            <span>Photo</span>
-          </div>
-
-        </div>
-
-        <div class="member-content">
-
-          <h3 class="member-name">
-            Collaborator Name
-          </h3>
-
-          <div class="member-position">
-            Position, Institution
-          </div>
-
-          <p class="member-research">
-            Research interests and major collaboration areas can be
-            introduced here.
-          </p>
-
-          <div class="member-links">
-
-            <a
-              href="mailto:email@example.com"
-              title="Email">
-
-              <i class="fas fa-envelope"></i>
-            </a>
-
-            <a
-              href="#"
-              title="Homepage">
-
-              <i class="fas fa-globe"></i>
-            </a>
-
-          </div>
-        </div>
+      <div
+        class="institution-placeholder"
+        style="display:none;">
+        Partner Institution
       </div>
     </div>
 
   </div>
 
   <div class="collaboration-note">
-    We welcome academic and professional collaboration in transportation
-    planning, railway systems, public transit, mobility data analytics,
-    and artificial intelligence.
+    We collaborate with universities, public agencies, research institutes,
+    and industry partners in transportation planning, railway systems,
+    mobility analytics, and artificial intelligence.
   </div>
 
 </section>
