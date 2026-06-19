@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,6 +20,7 @@
       color: #263238;
     }
 
+    /* Header */
     .header-top {
       background-color: #e0f2ff;
       padding: 3px 20px;
@@ -32,6 +34,12 @@
       align-items: center;
     }
 
+    .header-logo {
+      height: 200px;
+      width: auto;
+      margin-right: 20px;
+    }
+
     .site-logo {
       font-size: 1.5rem;
       font-weight: 600;
@@ -39,6 +47,7 @@
       color: #0c4a6e;
     }
 
+    /* Navigation */
     .site-navbar {
       background: #cceeff;
       padding: 0.8rem 0;
@@ -56,26 +65,29 @@
       font-weight: 700;
     }
 
+    /* Page heading */
     .page-header {
       background: linear-gradient(135deg, #e0f2ff, #f8fcff);
-      padding: 3.5rem 1rem;
+      padding: 3rem 1rem;
       text-align: center;
       border-bottom: 1px solid #d3ebf7;
     }
 
     .page-header h1 {
+      margin-bottom: 0.8rem;
       color: #0c4a6e;
       font-weight: 700;
-      margin-bottom: 0.8rem;
     }
 
     .page-header p {
       max-width: 760px;
       margin: 0 auto;
       color: #496774;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
+      line-height: 1.65;
     }
 
+    /* Main content */
     main {
       max-width: 1100px;
       margin: 3rem auto;
@@ -91,18 +103,25 @@
       align-items: center;
       gap: 1rem;
       padding-bottom: 0.8rem;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
       border-bottom: 2px solid #b9e3f8;
     }
 
-    .institution-logo {
+    .institution-badge {
       width: 58px;
       height: 58px;
-      object-fit: contain;
-      background: #ffffff;
-      border: 1px solid #dcecf4;
-      border-radius: 8px;
-      padding: 6px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e0f2ff;
+      border: 1px solid #b9e3f8;
+      border-radius: 10px;
+      color: #0077b6;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.1;
     }
 
     .institution-title {
@@ -118,12 +137,13 @@
       font-size: 0.95rem;
     }
 
+    /* Member card */
     .member-card {
       height: 100%;
+      overflow: hidden;
       background: #ffffff;
       border: 1px solid #dce9ef;
       border-radius: 10px;
-      overflow: hidden;
       box-shadow: 0 3px 10px rgba(0, 62, 92, 0.06);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -133,18 +153,43 @@
       box-shadow: 0 8px 18px rgba(0, 62, 92, 0.12);
     }
 
+    /* Photo area */
     .member-photo-wrapper {
+      position: relative;
       width: 100%;
-      height: 260px;
+      height: 300px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: #eef7fb;
     }
 
     .member-photo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+      background: #ffffff;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #eef7fb;
+      color: #7b9aaa;
+      font-size: 0.95rem;
+    }
+
+    .photo-placeholder i {
+      margin-bottom: 0.6rem;
+      font-size: 3rem;
+      color: #9ab9c8;
     }
 
     .member-content {
@@ -199,15 +244,16 @@
       color: #385563;
     }
 
+    /* Mobile */
     @media (max-width: 768px) {
       .header-top {
-        padding: 5px 10px;
         height: auto;
+        padding: 5px 10px;
       }
 
-      .header-top img {
-        height: 110px !important;
-        margin-right: 8px !important;
+      .header-logo {
+        height: 110px;
+        margin-right: 8px;
       }
 
       .site-logo {
@@ -222,20 +268,17 @@
       }
 
       .page-header {
-        padding: 2.5rem 1rem;
+        padding: 2.4rem 1rem;
       }
 
       .page-header h1 {
         font-size: 2rem;
       }
 
-      .institution-header {
-        align-items: flex-start;
-      }
-
-      .institution-logo {
+      .institution-badge {
         width: 48px;
         height: 48px;
+        font-size: 0.75rem;
       }
 
       .institution-title {
@@ -243,7 +286,7 @@
       }
 
       .member-photo-wrapper {
-        height: 310px;
+        height: 320px;
       }
     }
   </style>
@@ -252,29 +295,38 @@
 
 <body>
 
+  <!-- Header -->
+
   <div class="header-top">
     <div class="container d-flex align-items-center">
 
 ```
   <a href="index.html">
-    <img src="logo.png" alt="Social Mobility Group Logo"
-         style="height: 200px; margin-right: 20px;">
+    <img
+      src="logo.png"
+      alt="Social Mobility Group Logo"
+      class="header-logo">
   </a>
 
   <div class="site-logo">
 
-    <!-- PC -->
-    <span class="d-none d-md-inline"
-          style="color:#0077b6; font-weight:normal;">
+    <!-- Desktop -->
+    <span
+      class="d-none d-md-inline"
+      style="color:#0077b6; font-weight:normal;">
+
       <b style="font-size:1.4em;">So</b>cial
       <b style="font-size:1.4em;">Mo</b>bility<br>
+
       Research Group
       @ <b style="font-size:1.4em;">Kyungil</b> University
     </span>
 
     <!-- Mobile -->
-    <span class="d-inline d-md-none"
-          style="color:#0077b6; font-weight:bold;">
+    <span
+      class="d-inline d-md-none"
+      style="color:#0077b6; font-weight:bold;">
+
       @ <b style="font-size:1.4em;">Kyungil University</b>
     </span>
 
@@ -284,22 +336,27 @@
 
   </div>
 
+  <!-- Navigation -->
+
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
 
 ```
-  <button class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-end"
-       id="navbarNav">
+  <div
+    class="collapse navbar-collapse justify-content-end"
+    id="navbarNav">
 
     <ul class="navbar-nav ml-auto">
 
@@ -320,7 +377,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#">Contact</a>
       </li>
 
     </ul>
@@ -330,15 +387,18 @@
 
   </nav>
 
+  <!-- Page introduction -->
+
   <section class="page-header">
-    <h1>Our Group</h1>
 
 ```
+<h1>Our Group</h1>
+
 <p>
   The Social Mobility Research Group brings together researchers and
   collaborators from universities and research institutions to address
-  transportation, mobility, railway, and urban challenges using data-driven
-  and artificial intelligence-based approaches.
+  transportation, mobility, railway, and urban challenges using
+  data-driven and artificial intelligence-based approaches.
 </p>
 ```
 
@@ -352,12 +412,14 @@
 
   <div class="institution-header">
 
-    <img src="kiu-logo.png"
-         alt="Kyungil University Logo"
-         class="institution-logo">
+    <div class="institution-badge">
+      KIU
+    </div>
 
     <div>
-      <h2 class="institution-title">Kyungil University</h2>
+      <h2 class="institution-title">
+        Kyungil University
+      </h2>
 
       <p class="institution-subtitle">
         Social Mobility Research Group
@@ -368,20 +430,31 @@
 
   <div class="row">
 
-    <!-- Member 1 -->
+    <!-- Eun Hak Lee -->
     <div class="col-lg-4 col-md-6 mb-4">
 
       <div class="member-card">
 
         <div class="member-photo-wrapper">
-          <img src="faculty.jpg"
-               alt="Dr. Eun Hak Lee"
-               class="member-photo">
+
+          <img
+            src="faculty.jpg"
+            alt="Dr. Eun Hak Lee"
+            class="member-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Photo</span>
+          </div>
+
         </div>
 
         <div class="member-content">
 
-          <h3 class="member-name">Dr. Eun Hak Lee</h3>
+          <h3 class="member-name">
+            Dr. Eun Hak Lee
+          </h3>
 
           <div class="member-position">
             Assistant Professor
@@ -394,29 +467,37 @@
 
           <div class="member-links">
 
-            <a href="mailto:eunhak@kiu.kr"
-               title="Email">
+            <a
+              href="mailto:eunhak@kiu.kr"
+              title="Email">
+
               <i class="fas fa-envelope"></i>
             </a>
 
-            <a href="https://scholar.google.com/citations?user=og0WNVkAAAAJ"
-               target="_blank"
-               rel="noopener noreferrer"
-               title="Google Scholar">
+            <a
+              href="https://scholar.google.com/citations?user=og0WNVkAAAAJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Google Scholar">
+
               <i class="fas fa-graduation-cap"></i>
             </a>
 
-            <a href="https://www.linkedin.com/in/eunhak/"
-               target="_blank"
-               rel="noopener noreferrer"
-               title="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/eunhak/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn">
+
               <i class="fab fa-linkedin"></i>
             </a>
 
-            <a href="https://github.com/tr-anon-users"
-               target="_blank"
-               rel="noopener noreferrer"
-               title="GitHub">
+            <a
+              href="https://github.com/tr-anon-users"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="GitHub">
+
               <i class="fab fa-github"></i>
             </a>
 
@@ -431,14 +512,25 @@
       <div class="member-card">
 
         <div class="member-photo-wrapper">
-          <img src="member2.jpg"
-               alt="Member Name"
-               class="member-photo">
+
+          <img
+            src="member2.jpg"
+            alt="Member Name"
+            class="member-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Photo</span>
+          </div>
+
         </div>
 
         <div class="member-content">
 
-          <h3 class="member-name">Member Name</h3>
+          <h3 class="member-name">
+            Member Name
+          </h3>
 
           <div class="member-position">
             Graduate Researcher
@@ -450,13 +542,17 @@
 
           <div class="member-links">
 
-            <a href="mailto:email@example.com"
-               title="Email">
+            <a
+              href="mailto:email@example.com"
+              title="Email">
+
               <i class="fas fa-envelope"></i>
             </a>
 
-            <a href="#"
-               title="Google Scholar">
+            <a
+              href="#"
+              title="Google Scholar">
+
               <i class="fas fa-graduation-cap"></i>
             </a>
 
@@ -471,14 +567,25 @@
       <div class="member-card">
 
         <div class="member-photo-wrapper">
-          <img src="member3.jpg"
-               alt="Member Name"
-               class="member-photo">
+
+          <img
+            src="member3.jpg"
+            alt="Member Name"
+            class="member-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Photo</span>
+          </div>
+
         </div>
 
         <div class="member-content">
 
-          <h3 class="member-name">Member Name</h3>
+          <h3 class="member-name">
+            Member Name
+          </h3>
 
           <div class="member-position">
             Undergraduate Researcher
@@ -490,8 +597,10 @@
 
           <div class="member-links">
 
-            <a href="mailto:email@example.com"
-               title="Email">
+            <a
+              href="mailto:email@example.com"
+              title="Email">
+
               <i class="fas fa-envelope"></i>
             </a>
 
@@ -508,9 +617,9 @@
 
   <div class="institution-header">
 
-    <img src="snu-logo.png"
-         alt="Seoul National University Logo"
-         class="institution-logo">
+    <div class="institution-badge">
+      SNU
+    </div>
 
     <div>
       <h2 class="institution-title">
@@ -526,15 +635,24 @@
 
   <div class="row">
 
-    <!-- Collaborator 1 -->
+    <!-- SNU Collaborator -->
     <div class="col-lg-4 col-md-6 mb-4">
 
       <div class="member-card">
 
         <div class="member-photo-wrapper">
-          <img src="snu-member1.jpg"
-               alt="Collaborator Name"
-               class="member-photo">
+
+          <img
+            src="snu-member1.jpg"
+            alt="Collaborator Name"
+            class="member-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Photo</span>
+          </div>
+
         </div>
 
         <div class="member-content">
@@ -554,18 +672,24 @@
 
           <div class="member-links">
 
-            <a href="mailto:email@example.com"
-               title="Email">
+            <a
+              href="mailto:email@example.com"
+              title="Email">
+
               <i class="fas fa-envelope"></i>
             </a>
 
-            <a href="#"
-               title="Google Scholar">
+            <a
+              href="#"
+              title="Google Scholar">
+
               <i class="fas fa-graduation-cap"></i>
             </a>
 
-            <a href="#"
-               title="Homepage">
+            <a
+              href="#"
+              title="Homepage">
+
               <i class="fas fa-globe"></i>
             </a>
 
@@ -582,9 +706,9 @@
 
   <div class="institution-header">
 
-    <img src="tti-logo.png"
-         alt="Texas A&M Transportation Institute Logo"
-         class="institution-logo">
+    <div class="institution-badge">
+      TTI
+    </div>
 
     <div>
       <h2 class="institution-title">
@@ -600,15 +724,24 @@
 
   <div class="row">
 
-    <!-- Collaborator 1 -->
+    <!-- TTI Collaborator -->
     <div class="col-lg-4 col-md-6 mb-4">
 
       <div class="member-card">
 
         <div class="member-photo-wrapper">
-          <img src="tti-member1.jpg"
-               alt="Collaborator Name"
-               class="member-photo">
+
+          <img
+            src="tti-member1.jpg"
+            alt="Collaborator Name"
+            class="member-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Photo</span>
+          </div>
+
         </div>
 
         <div class="member-content">
@@ -628,18 +761,24 @@
 
           <div class="member-links">
 
-            <a href="mailto:email@example.com"
-               title="Email">
+            <a
+              href="mailto:email@example.com"
+              title="Email">
+
               <i class="fas fa-envelope"></i>
             </a>
 
-            <a href="#"
-               title="Google Scholar">
+            <a
+              href="#"
+              title="Google Scholar">
+
               <i class="fas fa-graduation-cap"></i>
             </a>
 
-            <a href="#"
-               title="Institutional Profile">
+            <a
+              href="#"
+              title="Institutional Profile">
+
               <i class="fas fa-building"></i>
             </a>
 
@@ -656,9 +795,9 @@
 
   <div class="institution-header">
 
-    <img src="collaboration-logo.png"
-         alt="Collaborating Institutions"
-         class="institution-logo">
+    <div class="institution-badge">
+      PARTNER
+    </div>
 
     <div>
       <h2 class="institution-title">
@@ -674,15 +813,24 @@
 
   <div class="row">
 
-    <!-- Collaborator -->
+    <!-- Other Collaborator -->
     <div class="col-lg-4 col-md-6 mb-4">
 
       <div class="member-card">
 
         <div class="member-photo-wrapper">
-          <img src="collaborator1.jpg"
-               alt="Collaborator Name"
-               class="member-photo">
+
+          <img
+            src="collaborator1.jpg"
+            alt="Collaborator Name"
+            class="member-photo"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+          <div class="photo-placeholder">
+            <i class="fas fa-user"></i>
+            <span>Photo</span>
+          </div>
+
         </div>
 
         <div class="member-content">
@@ -702,13 +850,17 @@
 
           <div class="member-links">
 
-            <a href="mailto:email@example.com"
-               title="Email">
+            <a
+              href="mailto:email@example.com"
+              title="Email">
+
               <i class="fas fa-envelope"></i>
             </a>
 
-            <a href="#"
-               title="Homepage">
+            <a
+              href="#"
+              title="Homepage">
+
               <i class="fas fa-globe"></i>
             </a>
 
@@ -721,8 +873,8 @@
 
   <div class="collaboration-note">
     We welcome academic and professional collaboration in transportation
-    planning, railway systems, public transit, mobility data analytics, and
-    artificial intelligence.
+    planning, railway systems, public transit, mobility data analytics,
+    and artificial intelligence.
   </div>
 
 </section>
@@ -730,11 +882,18 @@
 
   </main>
 
+  <!-- Footer -->
+
   <footer class="footer text-center p-3">
-    <p class="mb-0">
-      &copy; <span id="year"></span>
-      Social Mobility Group. All rights reserved.
-    </p>
+
+```
+<p class="mb-0">
+  &copy;
+  <span id="year"></span>
+  Social Mobility Group. All rights reserved.
+</p>
+```
+
   </footer>
 
   <script>
