@@ -232,6 +232,18 @@
       color: #004f73;
     }
 
+    /* Institution category */
+    .institution-category {
+      margin-bottom: 2.8rem;
+    }
+
+    .institution-category-title {
+      margin: 0 0 1rem;
+      color: #0c4a6e;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
     /* Institution logos */
     .institution-grid {
       display: grid;
@@ -240,11 +252,12 @@
     }
 
     .institution-card {
-      height: 135px;
-      padding: 20px;
+      min-height: 165px;
+      padding: 18px 15px 14px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      flex-direction: column;
       background-color: #ffffff;
       border: 1px solid #dce9ef;
       border-radius: 10px;
@@ -257,19 +270,37 @@
       box-shadow: 0 7px 16px rgba(0, 62, 92, 0.1);
     }
 
+    .institution-logo-wrapper {
+      width: 100%;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .institution-card img {
       width: 100%;
-      height: 85px;
+      height: 82px;
       display: block;
       object-fit: contain;
       object-position: center;
     }
 
+    .institution-name {
+      margin-top: 12px;
+      color: #334e5c;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: center;
+    }
+
     .institution-placeholder {
       display: none;
       color: #607d8b;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
+      line-height: 1.3;
       text-align: center;
     }
 
@@ -344,8 +375,12 @@
       }
 
       .institution-card {
-        height: 115px;
-        padding: 15px;
+        min-height: 155px;
+        padding: 15px 12px 12px;
+      }
+
+      .institution-logo-wrapper {
+        height: 85px;
       }
 
       .institution-card img {
@@ -373,6 +408,7 @@
   <div class="header-top">
     <div class="container">
 
+```
   <a href="index.html">
     <img
       src="logo.png"
@@ -402,7 +438,7 @@
 
   </div>
 </div>
-
+```
 
   </div>
 
@@ -411,7 +447,7 @@
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
 
-
+```
   <button
     class="navbar-toggler"
     type="button"
@@ -463,7 +499,7 @@
     </ul>
   </div>
 </div>
-
+```
 
   </nav>
 
@@ -471,7 +507,7 @@
 
   <section class="page-header">
 
-
+```
 <h1>Our Group</h1>
 
 <p>
@@ -479,14 +515,15 @@
   public transit, railway systems, social mobility, mobility big data,
   and artificial intelligence-based transportation analysis.
 </p>
-
+```
 
   </section>
 
   <main>
 
-
+```
 <!-- Group members -->
+
 <section class="section-block">
 
   <div class="section-heading">
@@ -497,6 +534,7 @@
   <div class="member-grid">
 
     <!-- Dr. Eun Hak Lee -->
+
     <div class="member-item">
 
       <div class="member-card">
@@ -504,7 +542,7 @@
         <div class="member-photo-wrapper">
 
           <img
-            src="faculty1.jpg"
+            src="faculty.png"
             alt="Dr. Eun Hak Lee"
             class="member-photo"
             onerror="
@@ -572,6 +610,7 @@
     </div>
 
     <!-- Member 2 -->
+
     <div class="member-item">
 
       <div class="member-card">
@@ -622,6 +661,7 @@
     </div>
 
     <!-- Member 3 -->
+
     <div class="member-item">
 
       <div class="member-card">
@@ -675,6 +715,7 @@
 </section>
 
 <!-- Collaborating institutions -->
+
 <section class="section-block">
 
   <div class="section-heading">
@@ -682,184 +723,300 @@
     <p>Academic and professional research partners</p>
   </div>
 
-  <div class="institution-grid">
+  <!-- Domestic institutions -->
 
-    <!-- Seoul National University -->
-    <div class="institution-card">
-      <img
-        src="picture/snu-logo.png"
-        alt="Seoul National University"
-        title="Seoul National University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+  <div class="institution-category">
 
-      <div class="institution-placeholder">
-        Seoul National University
+    <h3 class="institution-category-title">
+      Domestic Institutions
+    </h3>
+
+    <div class="institution-grid">
+
+      <!-- Seoul National University -->
+
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/snu-logo.png"
+            alt="Seoul National University"
+            title="Seoul National University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Seoul National University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Seoul National University
+        </div>
+
       </div>
-    </div>
 
-    <!-- Hanyang University -->
-    <div class="institution-card">
-      <img
-        src="picture/hanyang-logo.png"
-        alt="Hanyang University"
-        title="Hanyang University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- Yonsei University -->
 
-      <div class="institution-placeholder">
-        Hanyang University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/yonsei-logo.png"
+            alt="Yonsei University"
+            title="Yonsei University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Yonsei University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Yonsei University
+        </div>
+
       </div>
-    </div>
 
-    <!-- Keimyung University -->
-    <div class="institution-card">
-      <img
-        src="picture/keimyung-logo.png"
-        alt="Keimyung University"
-        title="Keimyung University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- Korea University -->
 
-      <div class="institution-placeholder">
-        Keimyung University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/korea-logo.png"
+            alt="Korea University"
+            title="Korea University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Korea University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Korea University
+        </div>
+
       </div>
-    </div>
 
-    <!-- Yeungnam University -->
-    <div class="institution-card">
-      <img
-        src="picture/yeungnam-logo.png"
-        alt="Yeungnam University"
-        title="Yeungnam University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- Kyungpook National University -->
 
-      <div class="institution-placeholder">
-        Yeungnam University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/knu-logo.png"
+            alt="Kyungpook National University"
+            title="Kyungpook National University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Kyungpook National University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Kyungpook National University
+        </div>
+
       </div>
-    </div>
 
-    <!-- Kyungpook National University -->
-    <div class="institution-card">
-      <img
-        src="picture/knu-logo.png"
-        alt="Kyungpook National University"
-        title="Kyungpook National University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- Yeungnam University -->
 
-      <div class="institution-placeholder">
-        Kyungpook National University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/yeungnam-logo.png"
+            alt="Yeungnam University"
+            title="Yeungnam University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Yeungnam University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Yeungnam University
+        </div>
+
       </div>
-    </div>
 
-    <!-- Texas A&M University -->
-    <div class="institution-card">
-      <img
-        src="picture/tamu-logo.png"
-        alt="Texas A&amp;M University"
-        title="Texas A&amp;M University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- Keimyung University -->
 
-      <div class="institution-placeholder">
-        Texas A&amp;M University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/keimyung-logo.png"
+            alt="Keimyung University"
+            title="Keimyung University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Keimyung University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Keimyung University
+        </div>
+
       </div>
+
     </div>
+  </div>
 
-    <!-- Purdue University -->
-    <div class="institution-card">
-      <img
-        src="picture/purdue-logo.jpg.png"
-        alt="Purdue University"
-        title="Purdue University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+  <!-- International institutions -->
 
-      <div class="institution-placeholder">
-        Purdue University
+  <div class="institution-category">
+
+    <h3 class="institution-category-title">
+      International Institutions
+    </h3>
+
+    <div class="institution-grid">
+
+      <!-- Texas A&M University -->
+
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/tamu-logo.png"
+            alt="Texas A&amp;M University"
+            title="Texas A&amp;M University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Texas A&amp;M University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Texas A&amp;M University
+        </div>
+
       </div>
-    </div>
 
-    <!-- Yonsei University -->
-    <div class="institution-card">
-      <img
-        src="picture/yonsei-logo.png"
-        alt="Yonsei University"
-        title="Yonsei University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- The University of Texas at Austin -->
 
-      <div class="institution-placeholder">
-        Yonsei University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/austin-logo.png"
+            alt="The University of Texas at Austin"
+            title="The University of Texas at Austin"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            The University of Texas at Austin
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          The University of Texas at Austin
+        </div>
+
       </div>
-    </div>
 
-    <!-- Korea University -->
-    <div class="institution-card">
-      <img
-        src="picture/korea-logo.png"
-        alt="Korea University"
-        title="Korea University"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- University of North Texas -->
 
-      <div class="institution-placeholder">
-        Korea University
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/north-texas-logo.png"
+            alt="University of North Texas"
+            title="University of North Texas"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            University of North Texas
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          University of North Texas
+        </div>
+
       </div>
-    </div>
 
-    <!-- University of North Texas -->
-    <div class="institution-card">
-      <img
-        src="picture/north-texas-logo.png"
-        alt="University of North Texas"
-        title="University of North Texas"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
+      <!-- Purdue University -->
 
-      <div class="institution-placeholder">
-        University of North Texas
+      <div class="institution-card">
+
+        <div class="institution-logo-wrapper">
+
+          <img
+            src="picture/purdue-logo.jpg.png"
+            alt="Purdue University"
+            title="Purdue University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Purdue University
+          </div>
+
+        </div>
+
+        <div class="institution-name">
+          Purdue University
+        </div>
+
       </div>
+
     </div>
-
-    <!-- Austin institution -->
-    <div class="institution-card">
-      <img
-        src="picture/austin-logo.png"
-        alt="Austin Partner Institution"
-        title="Austin Partner Institution"
-        onerror="
-          this.style.display='none';
-          this.nextElementSibling.style.display='block';
-        ">
-
-      <div class="institution-placeholder">
-        Austin Partner Institution
-      </div>
-    </div>
-
   </div>
 
   <div class="collaboration-note">
@@ -869,7 +1026,7 @@
   </div>
 
 </section>
-
+```
 
   </main>
 
@@ -877,13 +1034,13 @@
 
   <footer class="footer text-center p-3">
 
-
+```
 <p class="mb-0">
   &copy;
   <span id="year"></span>
   Social Mobility Group. All rights reserved.
 </p>
-
+```
 
   </footer>
 
@@ -897,4 +1054,5 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
