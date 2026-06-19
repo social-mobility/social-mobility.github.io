@@ -247,13 +247,13 @@
     /* Institution logos */
     .institution-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
     }
 
     .institution-card {
-      min-height: 150px;
-      padding: 15px 12px 12px;
+      min-height: 175px;
+      padding: 14px 10px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -272,7 +272,7 @@
 
     .institution-logo-wrapper {
       width: 100%;
-      height: 82px;
+      height: 115px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -280,25 +280,25 @@
 
     .institution-card img {
       width: 100%;
-      height: 72px;
+      height: 108px;
       display: block;
       object-fit: contain;
       object-position: center;
     }
 
     .institution-name {
-      margin-top: 10px;
+      margin-top: 8px;
       color: #334e5c;
-      font-size: 0.86rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      line-height: 1.3;
+      line-height: 1.25;
       text-align: center;
     }
 
     .institution-placeholder {
       display: none;
       color: #607d8b;
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       font-weight: 700;
       line-height: 1.3;
       text-align: center;
@@ -375,20 +375,20 @@
       }
 
       .institution-card {
-        min-height: 145px;
-        padding: 14px 10px 10px;
+        min-height: 165px;
+        padding: 12px 10px 10px;
       }
 
       .institution-logo-wrapper {
-        height: 78px;
+        height: 105px;
       }
 
       .institution-card img {
-        height: 68px;
+        height: 98px;
       }
 
       .institution-name {
-        font-size: 0.84rem;
+        font-size: 0.82rem;
       }
     }
 
@@ -406,8 +406,6 @@
 </head>
 
 <body>
-
-  <!-- Header -->
 
   <div class="header-top">
     <div class="container">
@@ -446,8 +444,6 @@
 
   </div>
 
-  <!-- Navigation -->
-
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
     <div class="container">
 
@@ -471,33 +467,23 @@
     <ul class="navbar-nav ml-auto">
 
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          Home
-        </a>
+        <a class="nav-link" href="index.html">Home</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="publications.html">
-          Publication
-        </a>
+        <a class="nav-link" href="publications.html">Publication</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link active" href="group.html">
-          Group
-        </a>
+        <a class="nav-link active" href="group.html">Group</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="projects.html">
-          Projects
-        </a>
+        <a class="nav-link" href="projects.html">Projects</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          Contact
-        </a>
+        <a class="nav-link" href="#">Contact</a>
       </li>
 
     </ul>
@@ -506,8 +492,6 @@
 
 
   </nav>
-
-  <!-- Page introduction -->
 
   <section class="page-header">
 
@@ -526,8 +510,6 @@
   <main>
 
 
-<!-- Group members -->
-
 <section class="section-block">
 
   <div class="section-heading">
@@ -537,8 +519,6 @@
 
   <div class="member-grid">
 
-    <!-- Dr. Eun Hak Lee -->
-
     <div class="member-item">
 
       <div class="member-card">
@@ -546,7 +526,7 @@
         <div class="member-photo-wrapper">
 
           <img
-            src="faculty.jpg"
+            src="faculty.png"
             alt="Dr. Eun Hak Lee"
             class="member-photo"
             onerror="
@@ -613,8 +593,6 @@
       </div>
     </div>
 
-    <!-- Member 2 -->
-
     <div class="member-item">
 
       <div class="member-card">
@@ -663,8 +641,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Member 3 -->
 
     <div class="member-item">
 
@@ -718,16 +694,12 @@
   </div>
 </section>
 
-<!-- Collaborating institutions -->
-
 <section class="section-block">
 
   <div class="section-heading">
     <h2>Collaborating Institutions</h2>
     <p>Academic and professional research partners</p>
   </div>
-
-  <!-- Domestic institutions -->
 
   <div class="institution-category">
 
@@ -737,12 +709,8 @@
 
     <div class="institution-grid">
 
-      <!-- Seoul National University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/snu-logo.png"
             alt="Seoul National University"
@@ -755,21 +723,15 @@
           <div class="institution-placeholder">
             Seoul National University
           </div>
-
         </div>
 
         <div class="institution-name">
           Seoul National University
         </div>
-
       </div>
 
-      <!-- Yonsei University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/yonsei-logo.png"
             alt="Yonsei University"
@@ -782,21 +744,15 @@
           <div class="institution-placeholder">
             Yonsei University
           </div>
-
         </div>
 
         <div class="institution-name">
           Yonsei University
         </div>
-
       </div>
 
-      <!-- Korea University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/korea-logo.png"
             alt="Korea University"
@@ -809,21 +765,36 @@
           <div class="institution-placeholder">
             Korea University
           </div>
-
         </div>
 
         <div class="institution-name">
           Korea University
         </div>
-
       </div>
 
-      <!-- Kyungpook National University -->
+     <div class="institution-card">
+        <div class="institution-logo-wrapper">
+          <img
+            src="picture/hanyang-logo.png"
+            alt="Hanyang University"
+            title="Hanyang University"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='block';
+            ">
+
+          <div class="institution-placeholder">
+            Hanyang University
+          </div>
+        </div>
+
+        <div class="institution-name">
+          Hanyang University
+        </div>
+      </div>
 
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/knu-logo.png"
             alt="Kyungpook National University"
@@ -836,21 +807,15 @@
           <div class="institution-placeholder">
             Kyungpook National University
           </div>
-
         </div>
 
         <div class="institution-name">
           Kyungpook National University
         </div>
-
       </div>
 
-      <!-- Yeungnam University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/yeungnam-logo.png"
             alt="Yeungnam University"
@@ -863,21 +828,15 @@
           <div class="institution-placeholder">
             Yeungnam University
           </div>
-
         </div>
 
         <div class="institution-name">
           Yeungnam University
         </div>
-
       </div>
 
-      <!-- Keimyung University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/keimyung-logo.png"
             alt="Keimyung University"
@@ -890,19 +849,15 @@
           <div class="institution-placeholder">
             Keimyung University
           </div>
-
         </div>
 
         <div class="institution-name">
           Keimyung University
         </div>
-
       </div>
 
     </div>
   </div>
-
-  <!-- International institutions -->
 
   <div class="institution-category">
 
@@ -912,12 +867,8 @@
 
     <div class="institution-grid">
 
-      <!-- Texas A&M University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/tamu-logo.png"
             alt="Texas A&amp;M University"
@@ -930,21 +881,15 @@
           <div class="institution-placeholder">
             Texas A&amp;M University
           </div>
-
         </div>
 
         <div class="institution-name">
           Texas A&amp;M University
         </div>
-
       </div>
 
-      <!-- The University of Texas at Austin -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/austin-logo.png"
             alt="The University of Texas at Austin"
@@ -957,21 +902,15 @@
           <div class="institution-placeholder">
             The University of Texas at Austin
           </div>
-
         </div>
 
         <div class="institution-name">
           The University of Texas at Austin
         </div>
-
       </div>
 
-      <!-- University of North Texas -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/north-texas-logo.png"
             alt="University of North Texas"
@@ -984,21 +923,15 @@
           <div class="institution-placeholder">
             University of North Texas
           </div>
-
         </div>
 
         <div class="institution-name">
           University of North Texas
         </div>
-
       </div>
 
-      <!-- Purdue University -->
-
       <div class="institution-card">
-
         <div class="institution-logo-wrapper">
-
           <img
             src="picture/purdue-logo.jpg.png"
             alt="Purdue University"
@@ -1011,13 +944,11 @@
           <div class="institution-placeholder">
             Purdue University
           </div>
-
         </div>
 
         <div class="institution-name">
           Purdue University
         </div>
-
       </div>
 
     </div>
@@ -1033,8 +964,6 @@
 
 
   </main>
-
-  <!-- Footer -->
 
   <footer class="footer text-center p-3">
 
