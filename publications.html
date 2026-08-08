@@ -544,9 +544,44 @@ ul.publication-list em {
     <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
   </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const publications = document.querySelectorAll(".publication-list > li");
+  const yearCounts = {};
+
+  publications.forEach(function(pub) {
+    const text = pub.textContent;
+    const match = text.match(/\((20\d{2})\)/);
+
+    if (match) {
+      const year = match[1];
+      yearCounts[year] = (yearCounts[year] || 0) + 1;
+    }
+  });
+
+  const statsContainer = document.getElementById("publicationStats");
+
+  let html = `
+    <div class="stat-item total">
+      <span class="stat-number">${publications.length}</span>
+      <span class="stat-label">Total</span>
+    </div>
+  `;
+
+  Object.keys(yearCounts)
+    .sort((a, b) => b - a)
+    .forEach(function(year) {
+      html += `
+        <div class="stat-item">
+          <span class="stat-number">${yearCounts[year]}</span>
+          <span class="stat-label">${year}</span>
+        </div>
+      `;
+    });
+
+  statsContainer.innerHTML = html;
+</script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
