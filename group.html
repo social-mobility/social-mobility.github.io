@@ -141,6 +141,13 @@
       max-width: 100%;
     }
 
+    /* Professor: first row alone on PC */
+    .member-item:first-child {
+      grid-column: 1 / -1;
+      width: calc((100% - 36px) / 4);
+      justify-self: start;
+    }
+    
     .member-card {
       height: 100%;
       overflow: hidden;
