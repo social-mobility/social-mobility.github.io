@@ -1774,42 +1774,24 @@ if (myName) {
 
 
     /* Oldest → newest */
+const currentYear = 2026;
+const firstYear = currentYear - 4;
 
-    const existingYears =
-      Object.keys(yearCounts)
-        .map(Number)
-        .sort((a, b) => a - b);
+const years = [];
 
+for (
+  let year = firstYear;
+  year <= currentYear;
+  year++
+) {
 
-    const firstYear =
-      existingYears[0];
+  years.push(year);
 
+  if (!yearCounts[year]) {
+    yearCounts[year] = 0;
+  }
 
-    const lastYear =
-      existingYears[existingYears.length - 1];
-
-
-    /*
-      Include missing years as zero
-      Example: 2019, 2020, 2021...
-    */
-
-    const years = [];
-
-
-    for (
-      let year = firstYear;
-      year <= lastYear;
-      year++
-    ) {
-
-      years.push(year);
-
-      if (!yearCounts[year]) {
-        yearCounts[year] = 0;
-      }
-
-    }
+}
 
 
     /* Y-axis maximum */
