@@ -350,7 +350,11 @@
     .page-header h1 {
       font-size: 2rem;
     }
-  
+
+     /* =========================
+     GROUP MEMBERS
+     ========================= */
+      
     /* Group members: 2 per row */
     .member-grid {
       display: grid;
@@ -362,7 +366,14 @@
       width: 100%;
       max-width: none;
     }
-  
+      
+    /* Professor only: centered single card */
+    .member-item:first-child {
+      grid-column: 1 / -1;
+      width: calc(50% - 6px);
+      justify-self: center;
+    }
+      
     .member-photo-wrapper {
       height: 200px;
     }
