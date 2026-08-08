@@ -143,9 +143,11 @@
 
     /* Professor: first row alone on PC */
     .member-item:first-child {
-      grid-column: 1 / -1;
-      width: calc((100% - 36px) / 4);
-      justify-self: start;
+      flex-basis: 100%;
+    }
+    
+    .member-item:first-child .member-card {
+      width: 240px;
     }
     
     .member-card {
