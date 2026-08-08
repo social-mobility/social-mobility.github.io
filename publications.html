@@ -1,679 +1,1992 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Publications | Social Mobility Group</title>
+
   <link rel="icon" type="image/png" href="favicon.png?v=1" sizes="64x64">
-  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=B612+Mono&display=swap"
+    rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
   <style>
+
     html {
-    overflow-y: scroll;
+      overflow-y: scroll;
     }
+
     body {
-      font-family: 'Cabin', sans-serif;
-      background-color: #f8f9fa;
       margin: 0;
+      font-family: 'Cabin', sans-serif;
+      color: #263238;
+      background-color: #f8f9fa;
     }
+
+
+    /* ==============================
+       HEADER
+       ============================== */
+
     .header-top {
-      background-color: #e0f2ff;
-      padding: 3px 20px;
       height: 180px;
+      padding: 3px 20px;
+      display: flex;
+      align-items: center;
+      background-color: #e0f2ff;
+    }
+
+    .header-top .container {
+      height: 100%;
       display: flex;
       align-items: center;
     }
-    .header-top .container {
-      height: 100%;
-      align-items: center;
+
+    .header-logo {
+      width: auto;
+      height: 200px;
+      margin-right: 20px;
     }
+
     .site-logo {
+      color: #0c4a6e;
       font-size: 1.5rem;
       font-weight: 600;
       line-height: 1.5;
-      color: #0c4a6e;
     }
+
+
+    /* ==============================
+       NAVIGATION
+       ============================== */
+
     .site-navbar {
-      background: #cceeff;
       padding: 0.8rem 0;
+      background-color: #cceeff;
     }
+
     .site-navbar .nav-link {
+      margin: 0 1rem;
       color: #003e5c;
       font-weight: 600;
-      margin: 0 1rem;
     }
+
     .site-navbar .nav-link:hover,
     .site-navbar .nav-link.active {
+      color: #003e5c;
+      font-weight: 700;
       text-decoration: underline;
+    }
+
+
+    /* ==============================
+       PAGE TITLE
+       ============================== */
+
+    h1 {
+      margin: 2rem auto 1.5rem;
+      color: #003e5c;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+
+    /* ==============================
+       PUBLICATION OVERVIEW
+       ============================== */
+
+    .publication-overview {
+      max-width: 1000px;
+      margin: 0 auto 2.2rem;
+    }
+
+
+    /* Top 3 cards */
+
+    .publication-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .publication-stat-card {
+      padding: 1.25rem 1rem;
+      background-color: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0, 62, 92, 0.06);
+    }
+
+    .publication-stat-icon {
+      margin-bottom: 0.5rem;
+      color: #55b6df;
+      font-size: 1rem;
+    }
+
+    .publication-stat-label {
+      margin-bottom: 0.45rem;
+      color: #607d8b;
+      font-size: 0.88rem;
       font-weight: 700;
     }
-    h1 {
-      font-size: 2rem;
-      margin: 2rem auto 1.5rem;
-      text-align: center;
-      color: #003e5c;
+
+    .publication-stat-number {
+      color: #0077b6;
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1;
     }
+
+    .publication-stat-note {
+      margin-top: 0.5rem;
+      color: #90a4ae;
+      font-size: 0.76rem;
+      line-height: 1.3;
+    }
+
+
+    /* ==============================
+       PUBLICATION BAR CHART
+       ============================== */
+
+    .publication-chart-card {
+      padding: 1.25rem 1.3rem 1rem;
+      background-color: #ffffff;
+      border: 1px solid #dce9ef;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 62, 92, 0.05);
+    }
+
+    .publication-chart-title {
+      margin-bottom: 1.3rem;
+      color: #0c4a6e;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .publication-chart-wrapper {
+      width: 100%;
+    }
+
+    .publication-chart-main {
+      display: flex;
+      height: 230px;
+    }
+
+
+    /* Y axis */
+
+    .publication-y-axis {
+      position: relative;
+      width: 35px;
+      flex-shrink: 0;
+      color: #78909c;
+      font-size: 0.7rem;
+    }
+
+    .publication-y-label {
+      position: absolute;
+      right: 8px;
+      transform: translateY(50%);
+    }
+
+
+    /* Plot area */
+
+    .publication-plot {
+      position: relative;
+      flex: 1;
+      border-left: 1px solid #b0bec5;
+      border-bottom: 1px solid #b0bec5;
+    }
+
+    .publication-gridline {
+      position: absolute;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #edf2f5;
+    }
+
+
+    /* Bars */
+
+    .publication-bars {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding: 0 12px;
+    }
+
+    .publication-bar-item {
+      position: relative;
+      height: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+    }
+
+    .publication-bar-count {
+      margin-bottom: 5px;
+      color: #0077b6;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .publication-bar {
+      width: 48%;
+      max-width: 58px;
+      min-width: 24px;
+      background: linear-gradient(to top, #0077b6, #55b6df);
+      border-radius: 4px 4px 0 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .publication-bar:hover {
+      opacity: 0.75;
+    }
+
+
+    /* X axis */
+
+    .publication-x-axis {
+      display: flex;
+      justify-content: space-around;
+      margin-left: 35px;
+      padding: 8px 12px 0;
+    }
+
+    .publication-x-label {
+      flex: 1;
+      color: #607d8b;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+
+    /* ==============================
+       PUBLICATION LIST
+       ============================== */
+
     ul.publication-list {
-  padding: 0;
-  list-style: none;
-  max-width: 1000px;
-  margin: 2rem auto;
-}
+      max-width: 1000px;
+      padding: 0;
+      margin: 2rem auto;
+      list-style: none;
+    }
 
-ul.publication-list > li {
-  padding: 1rem 1.2rem;
-  margin-bottom: 1rem;
-  line-height: 1.7;
-  background-color: #ffffff;
-  border-radius: 6px;
-  border-left: 4px solid #0077b6;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
+    ul.publication-list > li {
+      padding: 1rem 1.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      background-color: #ffffff;
+      border-left: 4px solid #0077b6;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
 
-ul.publication-list mark {
-  background-color: #e0f4ff;
-  color: #0077b6;
-  padding: 0 3px;
-  border-radius: 2px;
-}
+    ul.publication-list mark {
+      padding: 0 3px;
+      color: #0077b6;
+      background-color: #e0f4ff;
+      border-radius: 2px;
+    }
 
-ul.publication-list em {
-  display: block;
-  font-style: italic;
-  color: #555;
-  margin-top: 4px;
-  font-size: 0.95rem;
-}
-  li em {
-    font-style: italic;
-    color: #555;
-  }
-    /* ✅ Mobile style 추가 */
+    ul.publication-list em {
+      display: block;
+      margin-top: 4px;
+      color: #555;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+
+    /* ==============================
+       MOBILE
+       ============================== */
+
     @media (max-width: 768px) {
+
       .header-top {
-        padding: 5px 10px;
         height: auto;
+        padding: 5px 10px;
       }
+
       .header-logo {
         height: 110px;
         margin-right: 8px;
       }
-      
+
       .site-logo {
         font-size: 1rem;
-        line-height: 1.0;
+        line-height: 1;
         text-align: center;
         word-break: keep-word;
       }
+
       .navbar-nav {
         text-align: center;
       }
+
+
+      /* Keep 3 statistics in one row */
+
+      .publication-summary-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .publication-stat-card {
+        padding: 0.9rem 0.4rem;
+      }
+
+      .publication-stat-icon {
+        font-size: 0.8rem;
+      }
+
+      .publication-stat-label {
+        font-size: 0.7rem;
+      }
+
+      .publication-stat-number {
+        font-size: 1.8rem;
+      }
+
+      .publication-stat-note {
+        display: none;
+      }
+
+
+      /* Chart */
+
+      .publication-chart-card {
+        padding: 1rem 0.7rem 0.8rem;
+      }
+
+      .publication-chart-main {
+        height: 190px;
+      }
+
+      .publication-y-axis {
+        width: 28px;
+        font-size: 0.62rem;
+      }
+
+      .publication-y-label {
+        right: 5px;
+      }
+
+      .publication-x-axis {
+        margin-left: 28px;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      .publication-bars {
+        padding: 0 4px;
+      }
+
+      .publication-bar {
+        width: 58%;
+        min-width: 14px;
+      }
+
+      .publication-bar-count {
+        font-size: 0.67rem;
+      }
+
+      .publication-x-label {
+        font-size: 0.62rem;
+      }
+
+      ul.publication-list > li {
+        padding: 0.9rem 1rem;
+      }
     }
+
   </style>
+
 </head>
+
+
 <body>
+
+
+  <!-- ==============================
+       HEADER
+       ============================== -->
+
   <div class="header-top">
-    <div class="container d-flex align-items-center">
+
+    <div class="container">
+
       <a href="index.html">
-        <img src="logo.png" alt="Logo" style="height: 200px; margin-right: 20px;">
+        <img
+          src="logo.png"
+          alt="Social Mobility Group Logo"
+          class="header-logo">
       </a>
-            <div class="site-logo">
-              <!-- PC용 긴 문장 -->
-              <span class="d-none d-md-inline" style="color:#0077b6; font-weight: normal">
-                <b style="font-size: 1.4em;">So</b>cial <b style="font-size: 1.4em;">Mo</b>bility<br> Research Group
-                                              @ <b style="font-size: 1.4em;">Kyungil</b> University
-              </span>
-            
-              <!-- 모바일용 짧은 문장 -->
-              <span class="d-inline d-md-none" style="color:#0077b6; font-weight: bold">
-                @ <b style="font-size: 1.4em;">Kyungil University</b>
-              </span>
-            </div>
+
+      <div class="site-logo">
+
+        <!-- PC -->
+        <span
+          class="d-none d-md-inline"
+          style="color:#0077b6; font-weight:normal;">
+
+          <b style="font-size:1.4em;">So</b>cial
+          <b style="font-size:1.4em;">Mo</b>bility<br>
+
+          Research Group
+          @ <b style="font-size:1.4em;">Kyungil</b> University
+
+        </span>
+
+
+        <!-- Mobile -->
+        <span
+          class="d-inline d-md-none"
+          style="color:#0077b6; font-weight:bold;">
+
+          @ <b style="font-size:1.4em;">Kyungil University</b>
+
+        </span>
+
+      </div>
+
     </div>
+
   </div>
+
+
+  <!-- ==============================
+       NAVIGATION
+       ============================== -->
 
   <nav class="site-navbar navbar navbar-expand-lg navbar-light">
+
     <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+
         <span class="navbar-toggler-icon"></span>
+
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
+
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarNav">
+
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="publications.html">Publication</a></li>
-          <li class="nav-item"><a class="nav-link" href="group.html">Group</a></li>
-          <!-- <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li> -->
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="publications.html">Publication</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="group.html">Group</a>
+          </li>
+
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" href="projects.html">Projects</a>
+          </li>
+          -->
+
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+
         </ul>
+
       </div>
+
     </div>
+
   </nav>
-  
-<main style="max-width: 1000px; margin: 2rem auto; padding: 0 1rem;">
-  
-  <h1>
-  <strong>Publications</strong>
-  <a href="https://scholar.google.com/citations?user=og0WNVkAAAAJ&hl=ko&inst=14379318592444324147" target="_blank" style="margin-left: 10px; color: #003e5c;">
-    <i class="fas fa-graduation-cap" style="color: #1d9bf0;"></i>
-  </a>
-</h1>
-  <div class="publication-stats">
-  <div class="publication-stats-title">Publication Overview</div>
-  <div class="publication-stats-grid" id="publicationStats"></div>
-</div>
-  
-<section class="publication-dashboard">
-  <div class="publication-dashboard-header">
-    <h2>Publication Overview</h2>
-    <p>Automatically summarized from the publication list below</p>
-  </div>
 
-  <div class="publication-summary-grid" id="publicationSummaryGrid"></div>
 
-  <div class="publication-year-panel">
-    <div class="publication-year-title">Publications by Year</div>
-    <div class="publication-year-chart" id="publicationYearChart"></div>
-  </div>
-</section>
-  
-<ul class="publication-list">
-  
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 1.2%, Q1]
-  </span>
-   <mark>EH Lee*</mark>, E Lee (2026) — 
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S1366554526002693" target="_blank">
-    <strong>Electric vehicle charging station location selection using generative artificial intelligence.</strong>
-  </a>
-  <em>Transportation Research Part E: Logistics and Transportation Review</em>
-</li>
+  <!-- ==============================
+       MAIN
+       ============================== -->
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
+  <main style="max-width:1000px; margin:2rem auto; padding:0 1rem;">
 
-  </span>
-   Y Jang, <mark>EH Lee</mark>, J. Yeo, OH Kwon (2026) — 
-  <a href="https://www.nature.com/articles/s41598-026-65498-1" target="_blank">
-    <strong>Spatially customized demand estimation for demand responsive transit.</strong>
-  </a>
-  <em>Scientific Reports</em>
-</li>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
+    <!-- PAGE TITLE -->
 
-  </span>
-   HS Park, SH Cho, <mark>EH Lee</mark>, SH Park, DH Shin (2026) — 
-  <a href="https://www.tandfonline.com/doi/abs/10.1080/23249935.2026.2709525" target="_blank">
-    <strong>Heuristic approach for solving demand responsive transport scheduling problems.</strong>
-  </a>
-  <em>Transportmetrica A: Transport Science</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-   <mark>EH Lee*</mark>, H Yun, SH Cho, E Lee (2026) — 
-  <a href="https://www.tandfonline.com/doi/abs/10.1080/19439962.2025.2598268" target="_blank">
-    <strong>Aggressive driving in ride-hailing: Work hours and road conditions.</strong>
-  </a>
-  <em>Journal of Transportation Safety & Security</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 4.7%, Q1]
-  </span>
-   S Lee, <mark>EH Lee*</mark> (2026) — 
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0001457525004245" target="_blank">
-    <strong>Do colored lane markings improve road safety? Causal evidence from Seoul.</strong>
-  </a>
-  <em>Accident Analysis & Prevention</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 4.7%, Q1]
-  </span>
-   ES Han, HC Park, <mark>EH Lee*</mark> (2026) — 
-  <a href="https://www.tandfonline.com/doi/abs/10.1080/12265934.2026.2636022" target="_blank">
-    <strong>Evaluating transfer efficiency between public transportation and bike sharing for Mobility as a Service (MaaS).</strong>
-  </a>
-  <em>International Journal of Urban Sciences</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 4.7%, Q1]
-  </span>
-   D Oh, <mark>EH Lee*</mark>, H Kim, EJ Kim (2026) — 
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981251407915" target="_blank">
-    <strong>Impact of bridging technology on older adults’ use of demand-responsive transit in a super-aged society.</strong>
-  </a>
-  <em>Transportation Research Part A: Policy and Practice</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-   <mark>EH Lee*</mark>, S Moon, SH Cho, H Lee (2026) — 
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981251407915" target="_blank">
-    <strong>Passenger to Train Assignment Using Only Smart Card Data.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 4.7%, Q1]
-  </span>
-   <mark>EH Lee*</mark>, E Kim, J Jeong (2025) — 
-  <a href="https://www.sciencedirect.com/science/article/pii/S0967070X25004172" target="_blank">
-    <strong>Senior Safety Zones Protect Older Adults from Traffic Crashes.</strong>
-  </a>
-  <em>Transport Policy</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 4.7%, Q1]
-  </span>
-   H Yun, <mark>EH Lee*</mark> (2025) — 
-  <a href="https://www.sciencedirect.com/science/article/pii/S0967070X2500246X?via%3Dihub" target="_blank">
-    <strong>Party politics in transport policy with a large language model.</strong>
-  </a>
-  <em>Transport Policy</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 6.7%, Q1]
-  </span>
-  <mark>EH Lee</mark>, G Stoeltje (2025) — 
-  <a href="https://www.sciencedirect.com/science/article/pii/S095965262501265X" target="_blank">
-    <strong>How Far Does Your Food Travel on the Highway? Food Miles and Carbon Footprint.</strong>
-  </a>
-  <em>Journal of Cleaner Production</em>
-</li>
+    <h1>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  <mark>EH Lee</mark> (2025) — 
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981251335900" target="_blank">
-    <strong>Understanding Gender Gap in Bike-Sharing Services via eXplainable Artificial Intelligence.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>
+      <strong>Publications</strong>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 18.9%, Q1]
-  </span>
-  <mark>EH Lee</mark>, J Prozzi, PGT Lewis, M Draper, B Kim (2025) — 
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0149718925000783" target="_blank">
-    <strong>From Scores to Strategy: Performance-Based Transportation Planning in Texas.</strong>
-  </a>
-  <em>Evaluation and Program Planning</em>
-</li>
+      <a
+        href="https://scholar.google.com/citations?user=og0WNVkAAAAJ&hl=ko&inst=14379318592444324147"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="margin-left:10px; color:#003e5c;">
 
-<li>
-  Y Wang, S Xing, C Can, ..., <mark>EH Lee</mark>, Z Tu (2025) —
-  <a href="https://arxiv.org/abs/2505.08854" target="_blank">
-    <strong>Generative AI for Autonomous Driving: Frontiers and Opportunities.</strong>
-  </a>
-  <em>arXiv preprint arXiv:2505.08854</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 7.0%, Q1]
-  </span>
-  <mark>EH Lee</mark>, E Lee (2025) —
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0264275125002574" target="_blank">
-    <strong>Iterative DEA for public transport transfer efficiency in a super-aging society.</strong>
-  </a>
-  <em>Cities</em>
-</li>
+        <i
+          class="fas fa-graduation-cap"
+          style="color:#1d9bf0;">
+        </i>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 5.3%, Q1]
-  </span>
-  <mark>EH Lee</mark>, HC Park (2025) —
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0038012125000035" target="_blank">
-    <strong>Publicness in highway projects: A multi-criteria decision-making approach to public-private partnerships.</strong>
-  </a>
-  <em>Socio-Economic Planning Sciences</em>
-</li>
+      </a>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 18.7%, Q1]
-  </span>
-  <mark>EH Lee</mark>, J Jeong (2025) —
-  <a href="https://www.nature.com/articles/s41598-025-90096-y" target="_blank">
-    <strong>Facility location problem for senior centers in an upcoming super-aging society.</strong>
-  </a>
-  <em>Scientific Reports</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 10.0%, Q1]
-  </span>
-  <mark>EH Lee</mark> (2024) —
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0739885924000866" target="_blank">
-    <strong>eXplainable DEA approach for evaluating performance of public transport origin-destination pairs.</strong>
-  </a>
-  <em>Research in Transportation Economics</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  <mark>EH Lee</mark>, E Lee (2024) —
-  <a href="https://www.tandfonline.com/doi/abs/10.1080/21680566.2024.2379377" target="_blank">
-    <strong>Congestion boundary approach for phase transitions in traffic flow.</strong>
-  </a>
-  <em>Transportmetrica B: Transport Dynamics</em>
-</li>
+    </h1>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 7.0%, Q1]
-  </span>
-  C Lee, <mark>EH Lee*</mark> (2024) —
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0264275124001483" target="_blank">
-    <strong>Evaluation of urban nightlife attractiveness for Millennials and Generation Z.</strong>
-  </a>
-  <em>Cities</em>
-</li>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  H Yun, <mark>EH Lee</mark>, S Moon, DK Kim (2024) —
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981231190394" target="_blank">
-    <strong>Data-driven approach for measuring and managing physical distancing in subways during pandemic conditions.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>
-     
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 8.7%, Q1]
-  </span>
-  K Kwak, <mark>EH Lee*</mark> (2024) —
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0048969724005230" target="_blank">
-    <strong>Impact of road transport system on groundwater quality inferred from explainable artificial intelligence (XAI).</strong>
-  </a>
-  <em>Science of the Total Environment</em>
-</li>
+    <!-- ==============================
+         PUBLICATION OVERVIEW
+         ============================== -->
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  <mark>EH Lee</mark>, GJ Kim (2023) —
-  <a href="https://www.techno-press.org/content/?page=article&journal=sem&volume=88&num=4&ordernum=3" target="_blank">
-    <strong>Multi-objective optimization of submerged floating tunnel route considering structural safety and total travel time.</strong>
-  </a>
-  <em>Structural Engineering and Mechanics</em>
-</li>     
+    <section class="publication-overview">
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 2.1%, Q1]
-  </span>
-  <mark>EH Lee</mark>, J Jeong (2023) —
-  <a href="https://www.sciencedirect.com/science/article/pii/S1077291X23000358" target="_blank">
-    <strong>Assessing equity of vertical transport system installation in subway stations for mobility handicapped using data envelopment analysis.</strong>
-  </a>
-  <em>Journal of Public Transportation</em>
-</li>
-     
-<li>
-  <mark>EH Lee</mark> (2023) —
-  <a href="https://ieeexplore.ieee.org/abstract/document/10283835" target="_blank">
-    <strong>Traffic Speed Prediction of Urban Road Network based on High Importance Links using XGB and SHAP.</strong>
-  </a>
-  <em>IEEE Access</em>
-</li>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🏆 [Top 19.0%, Q1]
-  </span>
-  <mark>EH Lee</mark>, J Jeong (2023) —
-  <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214367X23001382" target="_blank">
-    <strong>Accessible taxi routing strategy based on travel behavior of people with disabilities incorporating vehicle routing problem and Gaussian mixture model.</strong>
-  </a>
-  <em>Travel Behaviour and Society</em>
-</li>     
+      <!-- TOP 3 STATISTICS -->
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  JH Min, SW Ham, DK Kim, <mark>EH Lee*</mark> (2023) —
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981221130026" target="_blank">
-    <strong>Deep multimodal learning for traffic speed estimation combining dedicated short-range communication and vehicle detection system data.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>     
+      <div
+        class="publication-summary-grid"
+        id="publicationSummaryGrid">
+      </div>
 
-<li>
-  <mark>EH Lee</mark> (2022) —
-  <a href="https://onlinelibrary.wiley.com/doi/full/10.1155/2022/6458371" target="_blank">
-    <strong>Exploring transit use during Covid‐19 based on XGB and SHAP using smart card data.</strong>
-  </a>
-  <em>Journal of Advanced Transportation</em>
-</li>     
 
-<li>
-  <mark>EH Lee</mark>, K Kim, SY Kho, DK Kim, SH Cho (2022) —
-  <a href="https://onlinelibrary.wiley.com/doi/full/10.1155/2022/6657486" target="_blank">
-    <strong>Exploring for route preferences of subway passengers using smart card and train log data.</strong>
-  </a>
-  <em>Journal of Advanced Transportation</em>
-</li>
+      <!-- PUBLICATIONS BY YEAR -->
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  <mark>EH Lee</mark>, K Kim, SY Kho, DK Kim, SH Cho (2021) —
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981211013349" target="_blank">
-    <strong>Estimating express train preference of urban railway passengers based on extreme gradient boosting (XGBoost) using smart card data.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>     
+      <div class="publication-chart-card">
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  H Yun, <mark>EH Lee</mark>, DK Kim, SH Cho (2021) —
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981211027562" target="_blank">
-    <strong>Development of estimating methodology for transit accessibility using smart card data.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>     
+        <div class="publication-chart-title">
+          Publications by Year
+        </div>
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  SW Han, <mark>EH Lee</mark>, DK Kim (2021) —
-  <a href="https://journals.sagepub.com/doi/abs/10.1177/03611981211013044" target="_blank">
-    <strong>Multi-objective optimization for skip-stop strategy based on smartcard data considering total travel time and equity.</strong>
-  </a>
-  <em>Transportation Research Record</em>
-</li>     
 
-<li>
-  <span style="display:block; margin-bottom: 4px; font-weight: 500;">
-    🌱 [Root]
-  </span>
-  <mark>EH Lee</mark>, SY Kho, DK Kim, SH Cho (2021) —
-  <a href="https://www.icevirtuallibrary.com/doi/abs/10.1680/jmuen.20.00004" target="_blank">
-    <strong>Travel time prediction using gated recurrent unit and spatio-temporal algorithm.</strong>
-  </a>
-  <em>Proceedings of the Institution of Civil Engineers - Municipal Engineer</em>
-</li>     
+        <div class="publication-chart-wrapper">
 
-<li>
-  <mark>EH Lee</mark>, H Shin, SH Cho, SY Kho, DK Kim (2019) —
-  <a href="https://www.mdpi.com/1996-1073/12/19/3609" target="_blank">
-    <strong>Evaluating the efficiency of transit-oriented development using network slacks-based data envelopment analysis.</strong>
-  </a>
-  <em>Energies</em>
-</li>     
 
-<li>
-  <mark>EH Lee</mark>, I Lee, SH Cho, SY Kho, DK Kim (2019) —
-  <a href="https://www.mdpi.com/2071-1050/11/10/2791" target="_blank">
-    <strong>A travel behavior-based skip-stop strategy considering train choice behaviors based on smartcard data.</strong>
-  </a>
-  <em>Sustainability</em>
-</li>     
+          <div class="publication-chart-main">
 
-<li>
-  <mark>EH Lee</mark>, H Lee, SY Kho, DK Kim (2019) —
-  <a href="https://link.springer.com/article/10.1007/s12205-018-0218-0" target="_blank">
-    <strong>Evaluation of Transfer Efficiency between Bus and Subway based on Data Envelopment Analysis using Smart Card Data.</strong>
-  </a>
-  <em>KSCE Journal of Civil Engineering</em>
-</li>
-     
-    
-   </ul>
-</main>
-    <footer class="footer text-center p-3" style="background:#e7f5ff;">
-    <p class="mb-0">&copy; <span id="year"></span> Social Mobility Group. All rights reserved.</p>
+
+            <!-- Y AXIS -->
+
+            <div
+              class="publication-y-axis"
+              id="publicationYAxis">
+            </div>
+
+
+            <!-- GRAPH -->
+
+            <div
+              class="publication-plot"
+              id="publicationPlot">
+
+
+              <div
+                class="publication-bars"
+                id="publicationBars">
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+          <!-- X AXIS -->
+
+          <div
+            class="publication-x-axis"
+            id="publicationXAxis">
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- ==============================
+         PUBLICATIONS
+         ============================== -->
+
+    <ul class="publication-list">
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 1.2%, Q1]
+        </span>
+
+        <mark>EH Lee*</mark>, E Lee (2026) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S1366554526002693"
+          target="_blank">
+
+          <strong>
+            Electric vehicle charging station location selection using generative artificial intelligence.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Part E: Logistics and Transportation Review
+        </em>
+
+      </li>
+
+
+      <li>
+
+        Y Jang, <mark>EH Lee</mark>, J. Yeo, OH Kwon (2026) —
+
+        <a
+          href="https://www.nature.com/articles/s41598-026-65498-1"
+          target="_blank">
+
+          <strong>
+            Spatially customized demand estimation for demand responsive transit.
+          </strong>
+
+        </a>
+
+        <em>
+          Scientific Reports
+        </em>
+
+      </li>
+
+
+      <li>
+
+        HS Park, SH Cho, <mark>EH Lee</mark>, SH Park, DH Shin (2026) —
+
+        <a
+          href="https://www.tandfonline.com/doi/abs/10.1080/23249935.2026.2709525"
+          target="_blank">
+
+          <strong>
+            Heuristic approach for solving demand responsive transport scheduling problems.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportmetrica A: Transport Science
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee*</mark>, H Yun, SH Cho, E Lee (2026) —
+
+        <a
+          href="https://www.tandfonline.com/doi/abs/10.1080/19439962.2025.2598268"
+          target="_blank">
+
+          <strong>
+            Aggressive driving in ride-hailing: Work hours and road conditions.
+          </strong>
+
+        </a>
+
+        <em>
+          Journal of Transportation Safety &amp; Security
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 4.7%, Q1]
+        </span>
+
+        S Lee, <mark>EH Lee*</mark> (2026) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0001457525004245"
+          target="_blank">
+
+          <strong>
+            Do colored lane markings improve road safety? Causal evidence from Seoul.
+          </strong>
+
+        </a>
+
+        <em>
+          Accident Analysis &amp; Prevention
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 4.7%, Q1]
+        </span>
+
+        ES Han, HC Park, <mark>EH Lee*</mark> (2026) —
+
+        <a
+          href="https://www.tandfonline.com/doi/abs/10.1080/12265934.2026.2636022"
+          target="_blank">
+
+          <strong>
+            Evaluating transfer efficiency between public transportation and bike sharing for Mobility as a Service (MaaS).
+          </strong>
+
+        </a>
+
+        <em>
+          International Journal of Urban Sciences
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 4.7%, Q1]
+        </span>
+
+        D Oh, <mark>EH Lee*</mark>, H Kim, EJ Kim (2026) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981251407915"
+          target="_blank">
+
+          <strong>
+            Impact of bridging technology on older adults’ use of demand-responsive transit in a super-aged society.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Part A: Policy and Practice
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee*</mark>, S Moon, SH Cho, H Lee (2026) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981251407915"
+          target="_blank">
+
+          <strong>
+            Passenger to Train Assignment Using Only Smart Card Data.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 4.7%, Q1]
+        </span>
+
+        <mark>EH Lee*</mark>, E Kim, J Jeong (2025) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/pii/S0967070X25004172"
+          target="_blank">
+
+          <strong>
+            Senior Safety Zones Protect Older Adults from Traffic Crashes.
+          </strong>
+
+        </a>
+
+        <em>
+          Transport Policy
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 4.7%, Q1]
+        </span>
+
+        H Yun, <mark>EH Lee*</mark> (2025) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/pii/S0967070X2500246X?via%3Dihub"
+          target="_blank">
+
+          <strong>
+            Party politics in transport policy with a large language model.
+          </strong>
+
+        </a>
+
+        <em>
+          Transport Policy
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 6.7%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, G Stoeltje (2025) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/pii/S095965262501265X"
+          target="_blank">
+
+          <strong>
+            How Far Does Your Food Travel on the Highway? Food Miles and Carbon Footprint.
+          </strong>
+
+        </a>
+
+        <em>
+          Journal of Cleaner Production
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee</mark> (2025) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981251335900"
+          target="_blank">
+
+          <strong>
+            Understanding Gender Gap in Bike-Sharing Services via eXplainable Artificial Intelligence.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 18.9%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, J Prozzi, PGT Lewis, M Draper, B Kim (2025) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0149718925000783"
+          target="_blank">
+
+          <strong>
+            From Scores to Strategy: Performance-Based Transportation Planning in Texas.
+          </strong>
+
+        </a>
+
+        <em>
+          Evaluation and Program Planning
+        </em>
+
+      </li>
+
+
+      <li>
+
+        Y Wang, S Xing, C Can, ..., <mark>EH Lee</mark>, Z Tu (2025) —
+
+        <a
+          href="https://arxiv.org/abs/2505.08854"
+          target="_blank">
+
+          <strong>
+            Generative AI for Autonomous Driving: Frontiers and Opportunities.
+          </strong>
+
+        </a>
+
+        <em>
+          arXiv preprint arXiv:2505.08854
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 7.0%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, E Lee (2025) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0264275125002574"
+          target="_blank">
+
+          <strong>
+            Iterative DEA for public transport transfer efficiency in a super-aging society.
+          </strong>
+
+        </a>
+
+        <em>
+          Cities
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 5.3%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, HC Park (2025) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0038012125000035"
+          target="_blank">
+
+          <strong>
+            Publicness in highway projects: A multi-criteria decision-making approach to public-private partnerships.
+          </strong>
+
+        </a>
+
+        <em>
+          Socio-Economic Planning Sciences
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 18.7%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, J Jeong (2025) —
+
+        <a
+          href="https://www.nature.com/articles/s41598-025-90096-y"
+          target="_blank">
+
+          <strong>
+            Facility location problem for senior centers in an upcoming super-aging society.
+          </strong>
+
+        </a>
+
+        <em>
+          Scientific Reports
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 10.0%, Q1]
+        </span>
+
+        <mark>EH Lee</mark> (2024) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0739885924000866"
+          target="_blank">
+
+          <strong>
+            eXplainable DEA approach for evaluating performance of public transport origin-destination pairs.
+          </strong>
+
+        </a>
+
+        <em>
+          Research in Transportation Economics
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee</mark>, E Lee (2024) —
+
+        <a
+          href="https://www.tandfonline.com/doi/abs/10.1080/21680566.2024.2379377"
+          target="_blank">
+
+          <strong>
+            Congestion boundary approach for phase transitions in traffic flow.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportmetrica B: Transport Dynamics
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 7.0%, Q1]
+        </span>
+
+        C Lee, <mark>EH Lee*</mark> (2024) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0264275124001483"
+          target="_blank">
+
+          <strong>
+            Evaluation of urban nightlife attractiveness for Millennials and Generation Z.
+          </strong>
+
+        </a>
+
+        <em>
+          Cities
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        H Yun, <mark>EH Lee</mark>, S Moon, DK Kim (2024) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981231190394"
+          target="_blank">
+
+          <strong>
+            Data-driven approach for measuring and managing physical distancing in subways during pandemic conditions.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 8.7%, Q1]
+        </span>
+
+        K Kwak, <mark>EH Lee*</mark> (2024) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S0048969724005230"
+          target="_blank">
+
+          <strong>
+            Impact of road transport system on groundwater quality inferred from explainable artificial intelligence (XAI).
+          </strong>
+
+        </a>
+
+        <em>
+          Science of the Total Environment
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee</mark>, GJ Kim (2023) —
+
+        <a
+          href="https://www.techno-press.org/content/?page=article&journal=sem&volume=88&num=4&ordernum=3"
+          target="_blank">
+
+          <strong>
+            Multi-objective optimization of submerged floating tunnel route considering structural safety and total travel time.
+          </strong>
+
+        </a>
+
+        <em>
+          Structural Engineering and Mechanics
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 2.1%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, J Jeong (2023) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/pii/S1077291X23000358"
+          target="_blank">
+
+          <strong>
+            Assessing equity of vertical transport system installation in subway stations for mobility handicapped using data envelopment analysis.
+          </strong>
+
+        </a>
+
+        <em>
+          Journal of Public Transportation
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <mark>EH Lee</mark> (2023) —
+
+        <a
+          href="https://ieeexplore.ieee.org/abstract/document/10283835"
+          target="_blank">
+
+          <strong>
+            Traffic Speed Prediction of Urban Road Network based on High Importance Links using XGB and SHAP.
+          </strong>
+
+        </a>
+
+        <em>
+          IEEE Access
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🏆 [Top 19.0%, Q1]
+        </span>
+
+        <mark>EH Lee</mark>, J Jeong (2023) —
+
+        <a
+          href="https://www.sciencedirect.com/science/article/abs/pii/S2214367X23001382"
+          target="_blank">
+
+          <strong>
+            Accessible taxi routing strategy based on travel behavior of people with disabilities incorporating vehicle routing problem and Gaussian mixture model.
+          </strong>
+
+        </a>
+
+        <em>
+          Travel Behaviour and Society
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        JH Min, SW Ham, DK Kim, <mark>EH Lee*</mark> (2023) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981221130026"
+          target="_blank">
+
+          <strong>
+            Deep multimodal learning for traffic speed estimation combining dedicated short-range communication and vehicle detection system data.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <mark>EH Lee</mark> (2022) —
+
+        <a
+          href="https://onlinelibrary.wiley.com/doi/full/10.1155/2022/6458371"
+          target="_blank">
+
+          <strong>
+            Exploring transit use during Covid‐19 based on XGB and SHAP using smart card data.
+          </strong>
+
+        </a>
+
+        <em>
+          Journal of Advanced Transportation
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <mark>EH Lee</mark>, K Kim, SY Kho, DK Kim, SH Cho (2022) —
+
+        <a
+          href="https://onlinelibrary.wiley.com/doi/full/10.1155/2022/6657486"
+          target="_blank">
+
+          <strong>
+            Exploring for route preferences of subway passengers using smart card and train log data.
+          </strong>
+
+        </a>
+
+        <em>
+          Journal of Advanced Transportation
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee</mark>, K Kim, SY Kho, DK Kim, SH Cho (2021) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981211013349"
+          target="_blank">
+
+          <strong>
+            Estimating express train preference of urban railway passengers based on extreme gradient boosting (XGBoost) using smart card data.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        H Yun, <mark>EH Lee</mark>, DK Kim, SH Cho (2021) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981211027562"
+          target="_blank">
+
+          <strong>
+            Development of estimating methodology for transit accessibility using smart card data.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        SW Han, <mark>EH Lee</mark>, DK Kim (2021) —
+
+        <a
+          href="https://journals.sagepub.com/doi/abs/10.1177/03611981211013044"
+          target="_blank">
+
+          <strong>
+            Multi-objective optimization for skip-stop strategy based on smartcard data considering total travel time and equity.
+          </strong>
+
+        </a>
+
+        <em>
+          Transportation Research Record
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <span style="display:block; margin-bottom:4px; font-weight:500;">
+          🌱 [Root]
+        </span>
+
+        <mark>EH Lee</mark>, SY Kho, DK Kim, SH Cho (2021) —
+
+        <a
+          href="https://www.icevirtuallibrary.com/doi/abs/10.1680/jmuen.20.00004"
+          target="_blank">
+
+          <strong>
+            Travel time prediction using gated recurrent unit and spatio-temporal algorithm.
+          </strong>
+
+        </a>
+
+        <em>
+          Proceedings of the Institution of Civil Engineers - Municipal Engineer
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <mark>EH Lee</mark>, H Shin, SH Cho, SY Kho, DK Kim (2019) —
+
+        <a
+          href="https://www.mdpi.com/1996-1073/12/19/3609"
+          target="_blank">
+
+          <strong>
+            Evaluating the efficiency of transit-oriented development using network slacks-based data envelopment analysis.
+          </strong>
+
+        </a>
+
+        <em>
+          Energies
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <mark>EH Lee</mark>, I Lee, SH Cho, SY Kho, DK Kim (2019) —
+
+        <a
+          href="https://www.mdpi.com/2071-1050/11/10/2791"
+          target="_blank">
+
+          <strong>
+            A travel behavior-based skip-stop strategy considering train choice behaviors based on smartcard data.
+          </strong>
+
+        </a>
+
+        <em>
+          Sustainability
+        </em>
+
+      </li>
+
+
+      <li>
+
+        <mark>EH Lee</mark>, H Lee, SY Kho, DK Kim (2019) —
+
+        <a
+          href="https://link.springer.com/article/10.1007/s12205-018-0218-0"
+          target="_blank">
+
+          <strong>
+            Evaluation of Transfer Efficiency between Bus and Subway based on Data Envelopment Analysis using Smart Card Data.
+          </strong>
+
+        </a>
+
+        <em>
+          KSCE Journal of Civil Engineering
+        </em>
+
+      </li>
+
+
+    </ul>
+
+  </main>
+
+
+  <!-- ==============================
+       FOOTER
+       ============================== -->
+
+  <footer
+    class="footer text-center p-3"
+    style="background:#e7f5ff;">
+
+    <p class="mb-0">
+
+      &copy;
+      <span id="year"></span>
+      Social Mobility Group. All rights reserved.
+
+    </p>
+
   </footer>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
 
-  const publications = document.querySelectorAll(".publication-list > li");
+  <!-- ==============================
+       AUTOMATIC STATISTICS
+       ============================== -->
 
-  const yearCounts = {};
-  let leadAuthoredCount = 0;
-  let coAuthoredCount = 0;
+  <script>
 
-  publications.forEach(function(pub) {
-    const text = pub.innerText.replace(/\s+/g, " ").trim();
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
-    /* Count by year */
-    const yearMatch = text.match(/\((20\d{2})\)/);
-    if (yearMatch) {
-      const year = yearMatch[1];
-      yearCounts[year] = (yearCounts[year] || 0) + 1;
-    }
+
+    const publications =
+      document.querySelectorAll(".publication-list > li");
+
+
+    const yearCounts = {};
+
+    let leadAuthoredCount = 0;
+    let topTierCount = 0;
+
+
+    publications.forEach(function(pub) {
+
+      const text =
+        pub.innerText.replace(/\s+/g, " ").trim();
+
+
+      /* ============================
+         YEAR
+         ============================ */
+
+      const yearMatch =
+        text.match(/\((20\d{2})\)/);
+
+
+      if (yearMatch) {
+
+        const year =
+          yearMatch[1];
+
+        yearCounts[year] =
+          (yearCounts[year] || 0) + 1;
+
+      }
+
+
+      /* ============================
+         LEAD-AUTHORED
+
+         Condition 1:
+         EH Lee is first author
+
+         Condition 2:
+         EH Lee* appears anywhere
+         ============================ */
+
+      const hasStar =
+        /EH Lee\*/.test(text);
+
+
+      let authorPart =
+        text;
+
+
+      const yearPosition =
+        authorPart.search(/\(20\d{2}\)/);
+
+
+      if (yearPosition !== -1) {
+
+        authorPart =
+          authorPart.substring(
+            0,
+            yearPosition
+          );
+
+      }
+
+
+      authorPart = authorPart
+
+        .replace(
+          /🏆\s*\[[^\]]*\]/g,
+          ""
+        )
+
+        .replace(
+          /🌱\s*\[[^\]]*\]/g,
+          ""
+        )
+
+        .trim();
+
+
+      const isFirstAuthor =
+        /^EH Lee\*?(,|$)/.test(authorPart);
+
+
+      if (
+        hasStar ||
+        isFirstAuthor
+      ) {
+
+        leadAuthoredCount++;
+
+      }
+
+
+      /* ============================
+         TOP TIER
+
+         Q1 / Trophy-marked paper
+         ============================ */
+
+      if (
+        /🏆/.test(text) ||
+        /\bQ1\b/.test(text)
+      ) {
+
+        topTierCount++;
+
+      }
+
+    });
+
+
+    /* ==============================
+       SUMMARY CARDS
+       ============================== */
+
+    const totalPublications =
+      publications.length;
+
+
+    document
+      .getElementById("publicationSummaryGrid")
+      .innerHTML = `
+
+
+        <div class="publication-stat-card">
+
+          <div class="publication-stat-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+
+          <div class="publication-stat-label">
+            Total
+          </div>
+
+          <div class="publication-stat-number">
+            ${totalPublications}
+          </div>
+
+          <div class="publication-stat-note">
+            Publications
+          </div>
+
+        </div>
+
+
+        <div class="publication-stat-card">
+
+          <div class="publication-stat-icon">
+            <i class="fas fa-feather-alt"></i>
+          </div>
+
+          <div class="publication-stat-label">
+            Lead-Authored
+          </div>
+
+          <div class="publication-stat-number">
+            ${leadAuthoredCount}
+          </div>
+
+          <div class="publication-stat-note">
+            First or corresponding author
+          </div>
+
+        </div>
+
+
+        <div class="publication-stat-card">
+
+          <div class="publication-stat-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+
+          <div class="publication-stat-label">
+            Top Tier
+          </div>
+
+          <div class="publication-stat-number">
+            ${topTierCount}
+          </div>
+
+          <div class="publication-stat-note">
+            Q1 publications
+          </div>
+
+        </div>
+
+      `;
+
+
+    /* ==============================
+       BAR CHART
+       ============================== */
+
+
+    /* Oldest → newest */
+
+    const existingYears =
+      Object.keys(yearCounts)
+        .map(Number)
+        .sort((a, b) => a - b);
+
+
+    const firstYear =
+      existingYears[0];
+
+
+    const lastYear =
+      existingYears[existingYears.length - 1];
+
 
     /*
-      Lead-authored:
-      1) EH Lee is first author
-      2) EH Lee* appears anywhere
+      Include missing years as zero
+      Example: 2019, 2020, 2021...
     */
-    const hasStar = /EH Lee\*/.test(text);
 
-    let authorPart = text;
-    const yearPos = authorPart.search(/\(20\d{2}\)/);
-    if (yearPos !== -1) {
-      authorPart = authorPart.substring(0, yearPos);
+    const years = [];
+
+
+    for (
+      let year = firstYear;
+      year <= lastYear;
+      year++
+    ) {
+
+      years.push(year);
+
+      if (!yearCounts[year]) {
+        yearCounts[year] = 0;
+      }
+
     }
 
-    authorPart = authorPart
-      .replace(/🏆\s*\[[^\]]*\]/g, "")
-      .replace(/🌱\s*\[[^\]]*\]/g, "")
-      .trim();
 
-    const isFirstAuthor = /^EH Lee\*?(,|$)/.test(authorPart);
+    /* Y-axis maximum */
 
-    if (hasStar || isFirstAuthor) {
-      leadAuthoredCount++;
+    const rawMaximum =
+      Math.max(
+        ...years.map(
+          year => yearCounts[year]
+        )
+      );
+
+
+    let yMaximum;
+
+
+    if (rawMaximum <= 5) {
+
+      yMaximum = 6;
+
+    } else if (rawMaximum <= 10) {
+
+      yMaximum = 10;
+
     } else {
-      coAuthoredCount++;
+
+      yMaximum =
+        Math.ceil(rawMaximum / 5) * 5;
+
     }
-  });
 
-  const totalPublications = publications.length;
-  const years = Object.keys(yearCounts).sort((a, b) => b - a);
-  const maxYearCount = Math.max(...Object.values(yearCounts));
 
-  /* Summary cards */
-  const summaryGrid = document.getElementById("publicationSummaryGrid");
-  summaryGrid.innerHTML = `
-    <div class="publication-stat-card">
-      <div class="publication-stat-top">
-        <span class="publication-stat-label">Total Publications</span>
-        <i class="fas fa-book-open publication-stat-icon"></i>
-      </div>
-      <div class="publication-stat-number">${totalPublications}</div>
-      <div class="publication-stat-note">All listed journal and preprint items</div>
-    </div>
+    /* Tick interval */
 
-    <div class="publication-stat-card">
-      <div class="publication-stat-top">
-        <span class="publication-stat-label">Lead-Authored</span>
-        <i class="fas fa-feather-alt publication-stat-icon"></i>
-      </div>
-      <div class="publication-stat-number">${leadAuthoredCount}</div>
-      <div class="publication-stat-note">First author or corresponding author (*)</div>
-    </div>
+    let tickInterval;
 
-    <div class="publication-stat-card">
-      <div class="publication-stat-top">
-        <span class="publication-stat-label">Co-Authored</span>
-        <i class="fas fa-users publication-stat-icon"></i>
-      </div>
-      <div class="publication-stat-number">${coAuthoredCount}</div>
-      <div class="publication-stat-note">Collaborative contributions</div>
-    </div>
 
-    <div class="publication-stat-card">
-      <div class="publication-stat-top">
-        <span class="publication-stat-label">Years Covered</span>
-        <i class="fas fa-chart-line publication-stat-icon"></i>
-      </div>
-      <div class="publication-stat-number">${years.length}</div>
-      <div class="publication-stat-note">${years[years.length - 1]}–${years[0]}</div>
-    </div>
-  `;
+    if (yMaximum <= 10) {
 
-  /* Year bars */
-  const yearChart = document.getElementById("publicationYearChart");
-  let yearHtml = "";
+      tickInterval = 2;
 
-  years.forEach(function(year) {
-    const count = yearCounts[year];
-    const width = (count / maxYearCount) * 100;
+    } else if (yMaximum <= 20) {
 
-    yearHtml += `
-      <div class="publication-year-row">
-        <div class="publication-year-label">${year}</div>
-        <div class="publication-year-count">${count}</div>
-        <div class="publication-year-bar">
-          <div class="publication-year-fill" style="width: ${width}%"></div>
+      tickInterval = 5;
+
+    } else {
+
+      tickInterval = 10;
+
+    }
+
+
+    /* ==============================
+       Y AXIS
+       ============================== */
+
+    const yAxis =
+      document.getElementById(
+        "publicationYAxis"
+      );
+
+
+    const plot =
+      document.getElementById(
+        "publicationPlot"
+      );
+
+
+    let yAxisHTML = "";
+    let gridHTML = "";
+
+
+    for (
+      let value = 0;
+      value <= yMaximum;
+      value += tickInterval
+    ) {
+
+      const bottom =
+        (value / yMaximum) * 100;
+
+
+      yAxisHTML += `
+
+        <div
+          class="publication-y-label"
+          style="bottom:${bottom}%">
+
+          ${value}
+
         </div>
-      </div>
-    `;
-  });
 
-  yearChart.innerHTML = yearHtml;
-</script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+      `;
+
+
+      if (value > 0) {
+
+        gridHTML += `
+
+          <div
+            class="publication-gridline"
+            style="bottom:${bottom}%">
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    yAxis.innerHTML =
+      yAxisHTML;
+
+
+    plot.insertAdjacentHTML(
+      "afterbegin",
+      gridHTML
+    );
+
+
+    /* ==============================
+       BARS
+       ============================== */
+
+    const barsContainer =
+      document.getElementById(
+        "publicationBars"
+      );
+
+
+    let barsHTML = "";
+
+
+    years.forEach(function(year) {
+
+      const count =
+        yearCounts[year];
+
+
+      const height =
+        (count / yMaximum) * 100;
+
+
+      barsHTML += `
+
+        <div class="publication-bar-item">
+
+
+          <div class="publication-bar-count">
+
+            ${count > 0 ? count : ""}
+
+          </div>
+
+
+          <div
+            class="publication-bar"
+            style="height:${height}%"
+            title="${year}: ${count} publications">
+
+          </div>
+
+
+        </div>
+
+      `;
+
+    });
+
+
+    barsContainer.innerHTML =
+      barsHTML;
+
+
+    /* ==============================
+       X AXIS
+       ============================== */
+
+    const xAxis =
+      document.getElementById(
+        "publicationXAxis"
+      );
+
+
+    xAxis.innerHTML =
+      years
+        .map(
+          year => `
+
+            <div class="publication-x-label">
+              ${year}
+            </div>
+
+          `
+        )
+        .join("");
+
+
+  </script>
+
+
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js">
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+
 </body>
+
 </html>
