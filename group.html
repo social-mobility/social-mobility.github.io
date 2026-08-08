@@ -377,11 +377,12 @@
     }
       
     /* Professor only: centered single card */
-    .member-item:first-child {
-      grid-column: 1 / -1;
-      width: calc(50% - 6px);
-      justify-self: center;
-    }
+.member-item:first-child {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: calc(50% - 6px);
+  justify-self: center;
+}
       
     .member-photo-wrapper {
       height: 200px;
