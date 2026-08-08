@@ -322,78 +322,94 @@
     }
 
     @media (max-width: 768px) {
-      .header-top {
-        height: auto;
-        padding: 5px 10px;
-      }
-
-      .header-logo {
-        height: 110px;
-        margin-right: 8px;
-      }
-
-      .site-logo {
-        font-size: 1rem;
-        line-height: 1;
-        text-align: center;
-        word-break: keep-word;
-      }
-
-      .navbar-nav {
-        text-align: center;
-      }
-
-      .page-header {
-        padding: 2.4rem 1rem;
-      }
-
-      .page-header h1 {
-        font-size: 2rem;
-      }
-
-      .member-grid {
-        justify-content: center;
-      }
-
-      .member-item {
-        width: 250px;
-      }
-
-      .member-photo-wrapper {
-        height: 300px;
-      }
-
-      .institution-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .institution-card {
-        min-height: 165px;
-        padding: 12px 10px 10px;
-      }
-
-      .institution-logo-wrapper {
-        height: 105px;
-      }
-
-      .institution-card img {
-        height: 98px;
-      }
-
-      .institution-name {
-        font-size: 0.82rem;
-      }
+    .header-top {
+      height: auto;
+      padding: 5px 10px;
     }
-
-    @media (max-width: 480px) {
-      .institution-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .institution-card {
-        width: 100%;
-      }
+  
+    .header-logo {
+      height: 110px;
+      margin-right: 8px;
     }
+  
+    .site-logo {
+      font-size: 1rem;
+      line-height: 1;
+      text-align: center;
+      word-break: keep-word;
+    }
+  
+    .navbar-nav {
+      text-align: center;
+    }
+  
+    .page-header {
+      padding: 2.4rem 1rem;
+    }
+  
+    .page-header h1 {
+      font-size: 2rem;
+    }
+  
+    /* Group members: 2 per row */
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  
+    .member-item {
+      width: 100%;
+      max-width: none;
+    }
+  
+    .member-photo-wrapper {
+      height: 200px;
+    }
+  
+    .member-content {
+      padding: 0.7rem;
+    }
+  
+    .member-name {
+      font-size: 0.95rem;
+    }
+  
+    .member-position {
+      margin-bottom: 0.45rem;
+      font-size: 0.78rem;
+    }
+  
+    .member-research {
+      display: none;
+    }
+  
+    /* Institution logos: 4 per row */
+    .institution-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+  
+    .institution-card {
+      min-height: 105px;
+      padding: 7px 5px;
+    }
+  
+    .institution-logo-wrapper {
+      height: 65px;
+    }
+  
+    .institution-card img {
+      height: 60px;
+    }
+  
+    .institution-name {
+      margin-top: 4px;
+      font-size: 0.62rem;
+      line-height: 1.15;
+    }
+  }
+
   </style>
 
 </head>
