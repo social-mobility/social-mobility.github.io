@@ -1610,56 +1610,66 @@
          EH Lee* appears anywhere
          ============================ */
 
-      const hasStar =
-        /EH Lee\*/.test(text);
+/* ============================
+   LEAD-AUTHORED
+
+   1) EH Lee is the first author
+   OR
+   2) EH Lee* = corresponding author
+   ============================ */
+
+const myName = pub.querySelector("mark");
+
+if (myName) {
+
+  const myNameText =
+    myName.textContent
+      .replace(/\s+/g, " ")
+      .trim();
+
+  /* EH Lee에 *가 붙었는지 */
+  const hasStar =
+    myNameText.includes("*");
 
 
-      let authorPart =
-        text;
+  /*
+    첫 번째 저자인지 확인
+
+    publication li를 복제한 후
+    🏆 / 🌱 / 🔥 등의 badge span을 모두 제거하고
+    실제 저자 문자열의 시작이 EH Lee인지 확인
+  */
+
+  const pubClone =
+    pub.cloneNode(true);
+
+  pubClone
+    .querySelectorAll("span")
+    .forEach(function(span) {
+      span.remove();
+    });
 
 
-      const yearPosition =
-        authorPart.search(/\(20\d{2}\)/);
+  const cleanText =
+    pubClone.innerText
+      .replace(/\s+/g, " ")
+      .trim();
 
 
-      if (yearPosition !== -1) {
-
-        authorPart =
-          authorPart.substring(
-            0,
-            yearPosition
-          );
-
-      }
+  const isFirstAuthor =
+    cleanText.startsWith("EH Lee");
 
 
-      authorPart = authorPart
+  if (
+    isFirstAuthor ||
+    hasStar
+  ) {
 
-        .replace(
-          /🏆\s*\[[^\]]*\]/g,
-          ""
-        )
+    leadAuthoredCount++;
 
-        .replace(
-          /🌱\s*\[[^\]]*\]/g,
-          ""
-        )
+  }
 
-        .trim();
-
-
-      const isFirstAuthor =
-        /^EH Lee\*?(,|$)/.test(authorPart);
-
-
-      if (
-        hasStar ||
-        isFirstAuthor
-      ) {
-
-        leadAuthoredCount++;
-
-      }
+}
 
 
       /* ============================
